@@ -4,20 +4,21 @@ class AdminController extends Controller
 {
     private $adminModel;
     private $rolModel;
+    private $rol;
 
     function __construct(){
         Security::auth('Administrador');
         $this->adminModel = $this->model("admin");
         $this->rolModel = $this->model("rol");
+        $this->rol = $this->rolModel->get_Roles($_SESSION["documento"]);
     }
     public function index(){
-        $rol = $this->rolModel->get_Roles($_SESSION["documento"]);
-        $this->view('admin/home', $rol);
+        $this->view('admin/home', $this->rol);
     }
 
     public function estado_novedad(){
         $get = $this->adminModel->getNovedad();
-        $this->view('admin/estado_novedad', $get);
+        $this->view('admin/estado_novedad', $this->rol, $get);
     }
 
     public function logout(){

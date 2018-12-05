@@ -9,7 +9,9 @@
 		</div>
 		
 		<div class="col-9">
-		 <button class="btn" style="color: white; float: right; margin-top: 13px; background-color: #000 !important;">Administrador <?php echo $_SESSION["nombre"].' '. $_SESSION["documento"];?></button>
+		 <button class="btn" style="color: white; float: right; margin-top: 13px; background-color: #000 !important;">
+			 USUARIO: <?php echo $_SESSION["nombre"].' '. $_SESSION["documento"];?>
+		 </button>
 		</div>
 		
 	</div>
@@ -35,25 +37,25 @@
 			<nav id ="" class="menu-lateral">
 				<ul>
 					<li>
-						<a href="" title="Ir al Inicio">
+						<a href="<?php echo URL_APP; ?>" title="Ir al Inicio">
 							<div class="barra"></div>
 							<span><i class="fas fa-link mr-2"></i>Inicio</span>
 						</a>
 					</li>
 					<li>
-						<a href="" title="Ir a Diligenciar">
+						<a href="<?php echo URL_APP; ?>" title="Ir a Diligenciar">
 							<div class="barra"></div>
-							<span><i class="fas fa-link mr-2"></i>Nueva Novedad</span>
+							<span><i class="fas fa-link mr-2"></i>Cambiar mis datos</span>
 						</a>
 					</li>
 					<li>
-						<a href="<?php echo URL_APP; ?>/admin/estado_novedad" title="Ir a Estados">
+						<a href="<?php echo URL_APP; ?>" title="Ir a Estados">
 							<div class="barra"></div>
-							<span><i class="fas fa-link mr-2"></i>Estados de Novedad</span>
+							<span><i class="fas fa-link mr-2"></i>Cambiar contraseña</span>
 						</a>
 					</li>
 					<li>
-						<a href="<?php echo URL_APP; ?>/admin/logout" title="Salir">
+						<a href="<?php echo URL_APP; ?>/user/logout" title="Salir">
 							<div class="barra"></div>
 							<span><i class="fas fa-link mr-2"></i>Salir</span>
 						</a>

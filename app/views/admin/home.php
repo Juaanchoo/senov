@@ -1,3 +1,4 @@
+<?php include_once sidebar_p1; ?>
 <div class="container-fluid">
 
 	<div class="row justify-content-around">
@@ -55,3 +56,4 @@
 <style>
 	
 </style>
+<?php include_once sidebar_p2; ?>

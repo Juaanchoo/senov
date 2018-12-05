@@ -9,11 +9,11 @@ class Controller
         if(file_exists('../app/views/'.strtolower($v).'.php')){
             include_once '../app/views/all/header.php';
             #--
-                if (isset($_SESSION['user'])) { require_once sidebar_p1;}
+                //if (isset($_SESSION['user'])) { require_once sidebar_p1;}
             #--
             include_once '../app/views/'.strtolower($v).'.php';
             #--
-                if (isset($_SESSION['user'])) { require_once sidebar_p2;}
+                //if (isset($_SESSION['user'])) { require_once sidebar_p2;}
             #--
             include_once '../app/views/all/footer.php';
         }else{

@@ -27,7 +27,7 @@
 	    			<td> <a href='#'>Ver mas</a></td>
 	    		</tr>
 				<?php
-				foreach ($data as $d) {
+				foreach ($data2 as $d) {
 					echo "<tr>
 						<td>	$d->id_novedad</td>
 						<td>	$d->documento</td>
