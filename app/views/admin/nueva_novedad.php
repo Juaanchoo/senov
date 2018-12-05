@@ -1,3 +1,4 @@
+<?php include_once sidebar_p1; ?>
 <div class="container mt-5">
     <div class="t-form">
       Nueva Novedad
@@ -51,3 +52,4 @@
   </div>
 </form>
 </div>
+<?php include_once sidebar_p2; ?>

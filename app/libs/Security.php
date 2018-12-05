@@ -68,11 +68,11 @@ class Security
                 case 'Apoyo':
                     header('location: '.URL_APP.'/apoyo');
                 break;
+                case 'Usuario':
+                header('location: '.URL_APP.'/user');
+                break;
                 case 'Instructor':
                     header('location: '.URL_APP.'/instructor');
-                break;
-                case 'Usuario':
-                    header('location: '.URL_APP.'/user');
                 break;
                 default:
                     header('location: '.URL_APP.'/');

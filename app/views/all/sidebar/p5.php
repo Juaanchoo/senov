@@ -1,3 +1,10 @@
+<script>
+	var url = '<?php echo URL_APP; ?>';
+	function cambiarRol(rol){
+		
+		window.location = url + "/home/rolControl&value="+ rol.value;
+	}
+</script>
 <div class="container-fluid">
 
 	<div class="row header-panel">
@@ -22,12 +29,14 @@
 			<div class="col-2 barra-lateral p-1">
 				
 				<div class="form-group p-4">
-				    <select class="form-control">
-				      <!-- <option value="">Adminintrador</option> -->
+				    <select class="form-control" onChange="cambiarRol(this)">
+				      <option value="3">Usuario</option>
 					  <?php 
 					  
 					 	foreach ($data as $r) {
-							 echo '<option value="'.$r->fk_id_cargo.'">'.$r->cargo.'</option>';
+							 if($r->fk_id_cargo !=3){
+								 echo '<option value="'.$r->fk_id_cargo.'">'.$r->cargo.'</option>';
+							 }
 						 } 
 					  ?>
 				    </select>

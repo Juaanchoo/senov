@@ -1,3 +1,4 @@
+<?php include_once sidebar_p1; ?>
 <div class="container mt-5">
 	<div class="card shadow">
 	  <h5 class="card-header t-card">Novedades</h5>
@@ -89,3 +90,4 @@
 		border-radius: 0px;
 	}
 </style>
+<?php include_once sidebar_p2; ?>

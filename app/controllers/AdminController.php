@@ -21,6 +21,11 @@ class AdminController extends Controller
         $this->view('admin/estado_novedad', $this->rol, $get);
     }
 
+    public function nueva_Novedad()
+    {
+        $this->view('admin/nueva_novedad', $this->rol);
+    }
+
     public function logout(){
         unset($_SESSION['user']);
         session_destroy();

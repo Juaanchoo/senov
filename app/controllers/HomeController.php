@@ -48,9 +48,24 @@ class HomeController extends Controller
     }
 
     //trae los roles
-    public function rolControl($documento)
+    public function rolControl()
     {
-        $rol = $this->rolModel->getRoles($documento);
+            if($_GET["value"]==1){
+                //$_SESSION["admin"]="";
+                header("Location: ".URL_APP."/admin/home");
+            }
+            if($_GET["value"]==2){
+                //$_SESSION["admin"]="1";
+                header("Location: apoyo/home");
+            }
+             if($_GET["value"]==3){
+                //$_SESSION["admin"]="";
+                header("Location: ".URL_APP."/user/home");    
+            }
+            if($_GET["value"]==4){
+                //$_SESSION["admin"]="";
+                header("Location: instructor/home");    
+            }
     }
     
     private function addIntento($id){
