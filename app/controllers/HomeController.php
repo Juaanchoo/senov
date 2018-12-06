@@ -4,17 +4,53 @@ class HomeController extends Controller
 {
     private $loginModel;
     private $rolModel;
+    private $data;
 
 	function __construct(){
         Security::auth('');
 		$this->loginModel = $this->model('login'); 
-		$this->rolModel = $this->model('rol'); 
+        $this->rolModel = $this->model('rol'); 
+        $this->data = $this->loginModel->all_tipo_documento();
     }
 
     public function index(){
     	
         $this->view('home/home');
     }
+
+    public function registrar()
+    {
+        if(isset($_POST["dni"])){
+            if(isset($_POST["tipo_documento"]) && isset($_POST["nombre"]) && isset($_POST["primer_apellido"]) && isset($_POST["segundo_apellido"]) && isset($_POST["email"]) && isset($_POST["telefono"]) && isset($_POST["password"]) && $_POST["password"] == $_POST["password2"]){
+                $info_usuario = array(
+                    'tipo_documento'=> $this->cleanData($_POST["tipo_documento"]),
+                    'dni'=> $this->cleanData($_POST["dni"]),
+                    'nombre'=> $this->cleanData($_POST["nombre"]),
+                    'primer_apellido'=> $this->cleanData($_POST["primer_apellido"]),
+                    'segundo_apellido'=> $this->cleanData($_POST["segundo_apellido"]),
+                    'telefono'=> $this->cleanData($_POST["telefono"]),
+                    'email'=> $this->cleanData($_POST["email"]), 
+                    'password'=> $this->cleanData($_POST["password"])
+                );
+                $data2 =  $this->loginModel->registrar($info_usuario);
+                $this->view('home/registro',$this->data,$data2);
+            }else { 
+            //devolver diferente respuesta
+            $data2 = "<script>swal({
+				type: 'error',
+				title: 'Opps..',
+				text: 'Error en lo datos del registro',
+              })</script>";
+              $this->view('home/registro',$this->data, $data2);
+            }
+        }else{
+          
+            $this->view('home/registro',$this->data);
+        }
+          
+    }
+
+    
     
     public function login(){
         if (isset($_POST['dni'],$_POST['password'])) {
@@ -51,20 +87,16 @@ class HomeController extends Controller
     public function rolControl($id)
     {
             if($id==1){
-                //$_SESSION["admin"]="";
                 header("Location: ".URL_APP."/admin/home");
             }
             if($id==2){
-                //$_SESSION["admin"]="1";
-                header("Location: apoyo/home");
+                header("Location: ".URL_APP."/apoyo/home");
             }
              if($id==3){
-                //$_SESSION["admin"]="";
                 header("Location: ".URL_APP."/user/home");    
             }
             if($id==4){
-                //$_SESSION["admin"]="";
-                header("Location: instructor/home");    
+                header("Location: ".URL_APP."/instructor/home");    
             }
     }
     

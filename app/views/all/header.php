@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="<?php echo URL_APP?>/css/bootstrap.min.css">
     <link rel="stylesheet" href="<?php echo URL_APP?>/fontawesome/css/all.min.css">
     <link rel="stylesheet" href="<?php echo URL_APP?>/css/app.css"> 
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@7.28.10/dist/sweetalert2.all.min.js"></script>
     <script src="<?php echo URL_APP?>/js/jquery.js"></script>
     <title><?php echo $title; ?></title>
 </head>

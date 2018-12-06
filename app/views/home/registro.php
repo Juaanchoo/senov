@@ -9,8 +9,7 @@
 			<div class="row border rounded bg-white shadow" style="height: 750px; width: 920px;">
 				<div class="col-12 app-p">
 					<form class="form" action="" method="post">
-                     <?php if(!is_null($respuesta)){
-                         echo $respuesta;}?>
+                     <?php if(!empty($data2)){echo $data2;}?>
 
                   	<div class="form-row">
                       	<div class="form-group col-md-6">
@@ -31,13 +30,19 @@
                   	</div>
 
 					  <div class="form-group">
-					    <label for="nombre">Nombre</label>
-					    <input name="nombre" type="text" class="form-control" id="nombre" placeholder="Nombre..." value="<?php echo isset($_REQUEST['nombre']) ? $_REQUEST['nombre'] : '';  ?>" required>
+					    <label for="nombre">Nombres</label>
+					    <input name="nombre" type="text" class="form-control" id="nombre" placeholder="Nombres..." value="<?php echo isset($_REQUEST['nombre']) ? $_REQUEST['nombre'] : '';  ?>" required>
 					  </div>
 
-					  <div class="form-group">
-					    <label for="apellido">Apellido</label>
-					    <input name="apellido" type="text" class="form-control" id="apellido" placeholder="Apellido..." value="<?php echo isset($_REQUEST['apellido']) ? $_REQUEST['apellido'] : '';  ?>" required>
+					  <div class="form-row">
+						<div class="form-group col-md-6">
+					    	<label for="primer_apellido">Primer Apellido</label>
+					    	<input name="primer_apellido" type="text" class="form-control" id="primer_apellido" placeholder="Primer Apellido..." value="<?php echo isset($_REQUEST['primer_apellido']) ? $_REQUEST['primer_apellido'] : '';  ?>" required>
+						</div>
+						<div class="form-group col-md-6">
+							<label for="segundo_apellido">Segundo Apellido</label>
+							<input name="segundo_apellido" type="text" class="form-control" id="segundo_apellido" placeholder="Segundo Apellido..." value="<?php echo isset($_REQUEST['segundo_apellido']) ? $_REQUEST['segundo_apellido'] : '';  ?>" required>
+						</div>
 					  </div>
                       <div class="form-group">
 					    <label for="email">Email</label>
