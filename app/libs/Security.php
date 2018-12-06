@@ -18,6 +18,9 @@ class Security
     
                 if(!$autorizado){
                     switch ($_SESSION['user']->permisos[0]) {
+                        case 'Usuario':
+                            header('location: '.URL_APP.'/user');
+                        break;
                         case 'Administrador':
                             header('location: '.URL_APP.'/admin');
                         break;
@@ -27,9 +30,7 @@ class Security
                         case 'Instructor':
                             header('location: '.URL_APP.'/instructor');
                         break;
-                        case 'Usuario':
-                            header('location: '.URL_APP.'/user');
-                        break;
+                        
                         default:
                             header('location: '.URL_APP.'/');
                         break;
@@ -62,15 +63,16 @@ class Security
             $cargo = $_SESSION['user']->permisos[0];
 
             switch ($cargo) {
+                case 'Usuario':
+                header('location: '.URL_APP.'/user');
+                break;
                 case 'Administrador':
                     header('location: '.URL_APP.'/admin');
                 break;
                 case 'Apoyo':
                     header('location: '.URL_APP.'/apoyo');
                 break;
-                case 'Usuario':
-                header('location: '.URL_APP.'/user');
-                break;
+                
                 case 'Instructor':
                     header('location: '.URL_APP.'/instructor');
                 break;

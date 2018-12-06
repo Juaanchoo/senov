@@ -4,12 +4,16 @@ class AdminController extends Controller
 {
     private $adminModel;
     private $rolModel;
+    private $loginModel;
     private $rol;
+    private $fichaModel;
 
     function __construct(){
         Security::auth('Administrador');
         $this->adminModel = $this->model("admin");
         $this->rolModel = $this->model("rol");
+        $this->loginModel = $this->model("login");
+        $this->fichaModel = $this->model("ficha");
         $this->rol = $this->rolModel->get_Roles($_SESSION["documento"]);
     }
     public function index(){
@@ -29,7 +33,14 @@ class AdminController extends Controller
 
     public function nueva_Novedad()
     {
-        $this->view('admin/nueva_novedad', $this->rol);
+        $td = $this->loginModel->all_Tipo_Documento();
+        $ficha = $this->fichaModel->get_Fichas();
+        $tn = $this->adminModel->get_Tipo_Novedad();
+
+        $datos = array ("tipos_documento" => $td,
+                        "fichas" => $ficha,
+                        "tipo_novedades" => $tn);
+        $this->view('admin/nueva_novedad', $this->rol, $datos);
     }
 
     public function logout(){

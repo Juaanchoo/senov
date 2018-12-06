@@ -28,6 +28,18 @@ class AdminModel extends DataBase{
         }
     }
 
+    public function get_Tipo_Novedad()
+    {
+        try {
+            $sql="SELECT * FROM tipo_novedad";
+            $this->db->query($sql);
+            return $this->db->getAll();
+            
+        } catch (Exception $e) {
+            return "DATA BASE ERROR";
+        }
+    }
+
     public function get_One_Novedad($id)
     {
         try{

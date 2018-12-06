@@ -27,7 +27,7 @@
 				
 				<div class="form-group p-4">
 				    <select class="form-control" onChange="cambiarRol(this)">
-				      <option value="1">Adminintrador</option>
+				      <option value="1">Administrador</option>
 					  <?php 
 					  
 					 	foreach ($data as $r) {
@@ -66,6 +66,19 @@
 							<span><i class="fas fa-link mr-2"></i>Salir</span>
 						</a>
 					</li>
+					<li>
+						<a href="<?php echo URL_APP; ?>/admin/logout" title="Salir">
+							<div class="barra"></div>
+							<span><i class="fas fa-link mr-2"></i>Salir</span>
+						</a>
+					</li>
+					<li>
+						<a href="<?php echo URL_APP; ?>/admin/logout" title="Salir">
+							<div class="barra"></div>
+							<span><i class="fas fa-link mr-2"></i>Salir</span>
+						</a>
+					</li>
+					
 				</ul>
 			</nav>
 		</div>

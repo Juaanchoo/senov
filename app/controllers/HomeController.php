@@ -87,16 +87,16 @@ class HomeController extends Controller
     public function rolControl($id)
     {
             if($id==1){
-                header("Location: ".URL_APP."/admin/home");
+                header("Location: ".URL_APP."/admin");
             }
             if($id==2){
-                header("Location: ".URL_APP."/apoyo/home");
+                header("Location: ".URL_APP."/apoyo");
             }
              if($id==3){
-                header("Location: ".URL_APP."/user/home");    
+                header("Location: ".URL_APP."/user");    
             }
             if($id==4){
-                header("Location: ".URL_APP."/instructor/home");    
+                header("Location: ".URL_APP."/instructor");    
             }
     }
     
