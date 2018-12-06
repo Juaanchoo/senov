@@ -16,10 +16,16 @@ class AdminController extends Controller
         $this->view('admin/home', $this->rol);
     }
 
-    public function estado_novedad(){
+    public function estado_novedad($id = null){
         $get = $this->adminModel->getNovedad();
-        $this->view('admin/estado_novedad', $this->rol, $get);
+        if ($id==null) {
+            $this->view('admin/estado_novedad', $this->rol, $get);
+        }else{
+            $getOne = $this->adminModel->get_One_Novedad($id);
+            $this->view('admin/estado_novedad', $this->rol, $get, $getOne);
+        }
     }
+
 
     public function nueva_Novedad()
     {

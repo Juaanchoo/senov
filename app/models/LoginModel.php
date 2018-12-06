@@ -11,7 +11,7 @@ class LoginModel extends DataBase
 	}
 	
 	public function show($id){
-		$sql = 'SELECT nombre, apellido, documento, password FROM usuarios_admin WHERE documento = ?';
+		$sql = 'SELECT nombre, primer_apellido, segundo_apellido, documento, password FROM usuarios_admin WHERE documento = ?';
 		$sql2 = 'SELECT tipc.cargo
 		FROM `permiso_cargo` as perc 
 		INNER JOIN tipo_cargo as tipc 
@@ -20,7 +20,7 @@ class LoginModel extends DataBase
 		$this->db->query($sql);
 		$this->db->bind(1,$id);
 		$user = $this->db->getOne();
-		$_SESSION['nombre'] = $user->nombre." ".$user->apellido;
+		$_SESSION['nombre'] = $user->nombre." ".$user->primer_apellido;
 		$_SESSION['documento'] = $user->documento;
 		
 		$this->db->query($sql2);

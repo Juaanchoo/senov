@@ -48,21 +48,21 @@ class HomeController extends Controller
     }
 
     //trae los roles
-    public function rolControl()
+    public function rolControl($id)
     {
-            if($_GET["value"]==1){
+            if($id==1){
                 //$_SESSION["admin"]="";
                 header("Location: ".URL_APP."/admin/home");
             }
-            if($_GET["value"]==2){
+            if($id==2){
                 //$_SESSION["admin"]="1";
                 header("Location: apoyo/home");
             }
-             if($_GET["value"]==3){
+             if($id==3){
                 //$_SESSION["admin"]="";
                 header("Location: ".URL_APP."/user/home");    
             }
-            if($_GET["value"]==4){
+            if($id==4){
                 //$_SESSION["admin"]="";
                 header("Location: instructor/home");    
             }

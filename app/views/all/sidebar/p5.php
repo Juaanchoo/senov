@@ -2,7 +2,7 @@
 	var url = '<?php echo URL_APP; ?>';
 	function cambiarRol(rol){
 		
-		window.location = url + "/home/rolControl&value="+ rol.value;
+		window.location = url + "/home/rolControl/"+ rol.value;
 	}
 </script>
 <div class="container-fluid">

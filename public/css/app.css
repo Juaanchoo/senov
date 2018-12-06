@@ -850,3 +850,10 @@ margin: 1px;
 	color: #fff;
 	font-size: 30px;
 }
+
+/** Modal*/
+.divM{
+	margin-left: 20px;
+	padding: -3px;
+	font-size: 18px;
+}

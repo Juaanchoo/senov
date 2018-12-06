@@ -7,7 +7,8 @@
     <link href="https://fonts.googleapis.com/css?family=Pacifico" rel="stylesheet">
     <link rel="stylesheet" href="<?php echo URL_APP?>/css/bootstrap.min.css">
     <link rel="stylesheet" href="<?php echo URL_APP?>/fontawesome/css/all.min.css">
-    <link rel="stylesheet" href="<?php echo URL_APP?>/css/app.css">
+    <link rel="stylesheet" href="<?php echo URL_APP?>/css/app.css"> 
+    <script src="<?php echo URL_APP?>/js/jquery.js"></script>
     <title><?php echo $title; ?></title>
 </head>
 <body>

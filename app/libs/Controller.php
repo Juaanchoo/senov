@@ -2,7 +2,7 @@
 
 class Controller 
 {
-    protected function view($v,$data = [], $data2 = []){
+    protected function view($v,$data = [], $data2 = [], $data3 = []){
         $title = explode('/',$v);
         $title = ucwords($title[0]);
 

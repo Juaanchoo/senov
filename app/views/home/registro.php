@@ -1,4 +1,3 @@
-<?php include_once sidebar_p1; ?>
 <div class="container app-m">
 	<div class="row justify-content-center">
 		<div class="col-10">
@@ -10,13 +9,18 @@
 			<div class="row border rounded bg-white shadow" style="height: 750px; width: 920px;">
 				<div class="col-12 app-p">
 					<form class="form" action="" method="post">
-                     
+                     <?php if(!is_null($respuesta)){
+                         echo $respuesta;}?>
 
                   	<div class="form-row">
                       	<div class="form-group col-md-6">
 						    <label for="tipo_documento">Tipo Documento</label><br>
                       	  		<select name="tipo_documento" id="tipo_documento">
-                      	      		<option value="">nada we</option>
+                      	      		<?php
+                      	     			foreach ($data as $d) {
+                      	          		echo '<option value="'.$d->id_tipo_documento.'">'.$d->tipo_documento.'</option>';
+                      	      			}
+                      	      		?>
                       	  		</select>
 					  	</div>
 
@@ -183,4 +187,3 @@ select:focus{
 	text-shadow: 1px 1px 5px #000;
 	}
 </style>
-<?php include_once sidebar_p2; ?>
