@@ -3,16 +3,28 @@
 	<div class="row justify-content-center">
 		<div class="col-10">
         	<div class="col-12 row section-senov">
-					<p style="margin-right:550px">Registrar Novedad</p>
-
-					<button type="submit" class="btn btn-volver"><a href="<?php echo URL_APP?>"><i class="fas fa-undo-alt"></i> Volver</a></button>
+				<p style="margin-right:550px">Registrar Novedad</p>
+				<button type="submit" class="btn btn-volver"><a href="<?php echo URL_APP?>"><i class="fas fa-undo-alt"></i> Volver</a></button>
         	</div>
-			<div class="row border rounded bg-white shadow" style="height: 620px; width: 920px;">
+			<div class="row border rounded bg-white shadow" style="height: 700px; width: 920px;">
 				<div class="col-12 app-p">
 					<form class="form" action="" method="post">
                      
-
+					
                   	<div class="form-row">
+
+					  	<div class="form-group col-md-6">
+							<label for="tipo_novedad">Tipos de Novedad</label>
+							<select name="tipo_novedad" id="tipo_novedad">
+									<option disabled selected value="">Seleccione..</option>
+									<?php 
+										foreach ($data2["tipo_novedades"] as $n) {
+											echo '<option value="'.$n->id_novedad.'">'.$n->novedad.'</option>';
+										}
+									?>
+                      	      		
+                      	  	</select>
+					  	</div>
                       	<div class="form-group col-md-6">
 						    <label for="tipo_documento">Tipo Documento</label><br>
                       	  		<select name="tipo_documento" id="tipo_documento">
@@ -26,90 +38,43 @@
                       	  		</select>
 					  	</div>
 
-					  	<div class="form-group col-md-6">
-					    	<label for="documento">Documento</label>
-					    	<input name="dni" type="text" class="form-control" id="documento" value="<?php echo isset($_REQUEST['dni']) ? $_REQUEST['dni'] : '';  ?>" placeholder="Documento..." required autocomplete="off">
-					  	</div>
                   	</div>
-
 					<div class="form-group">
-					    <label for="nombre">Nombres</label>
-					    <input name="nombre" type="text" class="form-control" id="nombre" placeholder="Nombres..." value="<?php echo isset($_REQUEST['nombre']) ? $_REQUEST['nombre'] : '';  ?>" required>
-					</div>
+						<label for="documento">Documento</label>
+					    <input name="dni" type="text" class="form-control" id="documento" value="<?php echo isset($_REQUEST['dni']) ? $_REQUEST['dni'] : '';  ?>" placeholder="Documento..." required autocomplete="off">
 
+					</div>
 					<div class="form-row">
 						<div class="form-group col-md-6">
-							<label for="primer_apellido">Primer Apellido</label>
-							<input name="primer_apellido" type="text" class="form-control" id="primer_apellido" placeholder="Primer Apellido..." value="<?php echo isset($_REQUEST['primer_apellido']) ? $_REQUEST['primer_apellido'] : '';  ?>" required>
-						</div>
+							<label for="documento">Motivo</label>
+					    	<textarea name="motivo"  class="form-control" id="motivo" placeholder="Motivo..." required autocomplete="off"></textarea>
+					  	</div>
 						<div class="form-group col-md-6">
-							<label for="segundo_apellido">Segundo Apellido</label>
-							<input name="segundo_apellido" type="text" class="form-control" id="segundo_apellido" placeholder="Segundo Apellido..." value="<?php echo isset($_REQUEST['segundo_apellido']) ? $_REQUEST['segundo_apellido'] : '';  ?>" required>
-						</div>
-					</div>
-					<div class="form-row">
-
-                      	<div class="form-group col-md-6">
-							<label for="email">Email</label>
-							<input name="email" type="email" class="form-control" id="email" placeholder="Email..." value="<?php echo isset($_REQUEST['email']) ? $_REQUEST['email'] : '';  ?>" required>
+					    	<label for="documento">Comentarios del responsable</label>
+					    	<textarea name="comentarios"  class="form-control" id="comentarios" placeholder="Comentarios del responsable..." required autocomplete="off"></textarea>
 					  	</div>
-                      	<div class="form-group col-md-6">
-							<label for="telefono">Télefono</label>
-							<input name="telefono" type="text" class="form-control" id="telefono" placeholder="Telefono..." value="<?php echo isset($_REQUEST['telefono']) ? $_REQUEST['telefono'] : '';  ?>" required>
-					  	</div>
-					
-					</div>
-					<div class="form-row">
-					
-                		<div class="form-group col-md-6">
-					    	<label for="fichas">Ficha&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-					    	<select name="ficha" id="ficha">
-									<option disabled selected value="">Seleccione..</option>
-									<?php 
-										foreach ($data2["fichas"] as $f) {
-											echo '<option value="'.$f->codigo_ficha.'">'.$f->codigo_ficha.'</option>';
-										}
-									?>
-                      	      		
-                      	  	</select>
-					  	</div>
-                      	<div class="form-group col-md-6">
-							<label for="tipo_novedad">Tipos de Novedad</label>
-							<select name="tipo_novedad" id="tipo_novedad">
-									<option disabled selected value="">Seleccione..</option>
-									<?php 
-										foreach ($data2["tipo_novedades"] as $n) {
-											echo '<option value="'.$n->id_novedad.'">'.$n->novedad.'</option>';
-										}
-									?>
-                      	      		
-                      	  	</select>
-					  	</div>
-					
-					</div>
-					<div class="form-row">
-						<!--<div id="fileNov">
-							<div class="input-group my-4">
-								<div class="fileInput">
-									<label for="file1" class="btn-file icon-upload">Acta de novedad</label>
-									<div id="inputval" class="input-value"></div>
-									<input id="file1" class="form-control" type="file" name="fileNovedad">	
-								</div>
-								<div id="smsFile" class=""></div>
-							</div>
-						</div> -->
-						<div class="form-group col-md-11">
-							<label for="acta_novedad">Acta novedad</label>					
-							<input class="form-control" placeholder="Acta novedad..." type="text" name="acta_novedad" id="acta_novedad">
-						</div>
-						<div class="form-group col-md-1">
-							<label for="acta_novedad">Subir</label>
-							<button style="float: right;" class="btn btn-warning"> <i class="fas fa-upload"></i> </button>	
-						</div>
-					</div>
-
 						
-					
+					</div>
+					<div class="form-row">
+						<div class="form-group col-md-6">
+							<label for="documento">Recomendaciones</label>
+					    	<textarea name="recomendaciones"  class="form-control" id="recomendaciones" placeholder="Recomendaciones.." required autocomplete="off"></textarea>
+					  	</div>
+						<div class="form-group col-md-6">
+					    	<label for="documento">Evidencias</label>
+					    	<textarea name="evidencias"  class="form-control" id="evidencias" placeholder="Evidencias..." required autocomplete="off"></textarea>
+					  	</div>
+						
+					</div>
+					<div class="form-group">
+						<label for="documento">Nueva Jornada</label>
+					    <textarea name="nueva_jornada"  class="form-control" id="nueva_jornada" placeholder="Nueva Jornada.." required autocomplete="off"></textarea>
+					</div>
+					<div class="form-group">
+						<label for="documento">Nueva Ficha</label>
+					    <textarea name="nueva_ficha"  class="form-control" id="nueva_ficha" placeholder="Nueva Ficha..." required autocomplete="off"></textarea>
+					</div>
+					<br>
 					  	<button type="submit" class="btn btn-login col-4">Registrar Novedad</button>
 					 	<button type="submit" class="btn btn-limpiar" style="float: right;"><a href="<?php echo URL_APP?>/home/registrar">Limpiar datos</a></button>
 						
@@ -168,7 +133,9 @@ body{
 }
 
 .app-p{
-	padding: 2rem;
+	
+	padding: 1rem;
+	padding-top: 55px;
 }
 .app-m{
 	margin-top: 10%;
@@ -181,11 +148,19 @@ label{
 select{
 	width: 370px;
 	height: 38px;
+	border-left: none;
+	border-right: none;
+	border-top: none;
 	border-bottom: 1px solid #333;
 	border-radius: 5px;
+	outline:none;
+
 }
 
 select:focus{
+	/* border-left-style: none;
+	border-right-style: none;
+	border-top-style: none; */
 	border-bottom: 1px solid #333;
 }
 
@@ -195,9 +170,14 @@ select:focus{
 }
 
 .form .form-control{
+	border-left: none;
+	border-right: none;
+	border-top: none;
 	border-radius: 5px;
 	border-bottom: 1px solid #333;
 	transition: 300ms ease; 
+	outline: none !important;
+
 }
 
 .form .form-control:focus{

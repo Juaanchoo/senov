@@ -763,6 +763,7 @@ margin: 1px;
 	border: 1px solid #FF7801;
 	background: none;
 	color: #fff;
+	outline: none !important;
 	font-weight: bold;
 	padding: 3px 10px;
 }

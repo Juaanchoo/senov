@@ -30,6 +30,7 @@ class LoginModel extends DataBase
 			$p[] = $a[$i]->cargo;
 		}		
 		$user->permisos = $p;
+		//var_dump($user); ARREGLAR EL LOGIN Y PASAR ENTRE ROLES
 		return $user;
 	}
 
