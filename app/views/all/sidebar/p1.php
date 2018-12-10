@@ -43,7 +43,7 @@
 			<nav id ="" class="menu-lateral">
 				<ul>
 					<li>
-						<a href="<?php echo URL_APP; ?>" title="Ir al Inicio">
+						<a href="<?php echo URL_APP; ?>/admin" title="Ir al Inicio">
 							<div class="barra"></div>
 							<span><i class="fas fa-link mr-2"></i>Inicio</span>
 						</a>
@@ -61,9 +61,9 @@
 						</a>
 					</li>
 					<li>
-						<a href="<?php echo URL_APP; ?>/admin/logout" title="Salir">
+						<a href="<?php echo URL_APP; ?>/admin/aprendiz" title="Gestion de Aprendices">
 							<div class="barra"></div>
-							<span><i class="fas fa-link mr-2"></i>Salir</span>
+							<span><i class="fas fa-link mr-2"></i>Aprendiz</span>
 						</a>
 					</li>
 					<li>

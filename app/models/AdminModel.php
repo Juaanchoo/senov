@@ -232,6 +232,8 @@ class AdminModel extends DataBase{
             return "Admin_get_One_Novedad_DATA BASE ERRORr";
         }
     }
+
+    
 }
 
 

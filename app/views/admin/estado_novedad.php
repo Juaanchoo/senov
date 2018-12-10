@@ -1,43 +1,43 @@
 <?php include_once sidebar_p1; ?>
 <div class="container mt-5">
 	<div class="card shadow">
-	  <h5 class="card-header t-card">Novedades</h5>
-	  <div class="card-body">
-	  	<div class="search-form">
-	  		<span>Buscar:</span>
-	  		<input type="text" placeholder="Buscar...">
-	  	</div>
-	    <table class="table table-bordered table-striped">
-	    	<thead class="text-center">
-	    		<tr>
-	    			<th>Id</th>
-	    			<th>Documento</th>
-	    			<th>Nombre</th>
-	    			<th>Apellido</th>
-	    			<th>Ficha</th>
-	    			<th>Tipo Novedad</th>
-	    			<th>Acta Novedad </th>
-	    			<th>Opciones</th>
-	    		</tr>
-	    	</thead>
-	    	<tbody class="text-center">
-					<?php
-					//var_dump($data2);
-						foreach ($data2 as $d) {
-							echo "<tr>
-								<td>	$d->id_novedad</td>
-								<td>	$d->documento</td>
-								<td>	$d->nombre</td>
-								<td>	$d->primer_apellido</td>
-								<td>	$d->fk_id_ficha</td>
-								<td>	$d->novedad</td>
-								<td> <a href=''>Generar PDF</a></td>
-								<td> <a href='".URL_APP."/admin/estado_Novedad/$d->id_novedad'>Ver mas</a></td>
-							</tr>";
-						}
-					?>
-	    	</tbody>
-	    </table>
+		<h5 class="card-header t-card">Novedades</h5>
+		<div class="card-body">
+			<div class="search-form">
+				<span>Buscar:</span>
+				<input type="text" placeholder="Buscar...">
+			</div>
+			<table class="table table-bordered table-striped">
+				<thead class="text-center">
+					<tr>
+						<th>Id</th>
+						<th>Documento</th>
+						<th>Nombre</th>
+						<th>Apellido</th>
+						<th>Ficha</th>
+						<th>Tipo Novedad</th>
+						<th>Acta Novedad </th>
+						<th>Opciones</th>
+					</tr>
+				</thead>
+				<tbody class="text-center">
+						<?php
+						//var_dump($data2);
+							foreach ($data2 as $d) {
+								echo "<tr>
+									<td>	$d->id_novedad</td>
+									<td>	$d->documento</td>
+									<td>	$d->nombre</td>
+									<td>	$d->primer_apellido</td>
+									<td>	$d->fk_id_ficha</td>
+									<td>	$d->novedad</td>
+									<td> <a href=''>Generar PDF</a></td>
+									<td> <a href='".URL_APP."/admin/estado_Novedad/$d->id_novedad'>Ver mas</a></td>
+								</tr>";
+							}
+						?>
+				</tbody>
+			</table>
 			<nav aria-label="...">
 				<ul class="pagination">
 					<li class="page-item disabled">
@@ -56,24 +56,25 @@
 					</li>
 				</ul>
 			</nav>
+
 			<?php if(isset($data3) && !empty($data3)): ?>
 			<!--modal ver novedad -->
 			<div class="modal fade bd-example-modal-lg" id="Modalsen" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  			<div class="modal-dialog modal-lg" role="document">
-    			<div class="modal-content">
-      			<div class="modal-header mh t-card">
-        			<p class="modal-title mt" id="exampleModalLabel">Información Novedad </p>
-        			<button type="button" class="close" data-dismiss="modal" aria-label="Close" style="margin-top: -5px;">
-         				<span aria-hidden="true">&times;</span>
-        			</button>
-      			</div>
-      			<div class="modal-body">
-	  					<hr>
+				<div class="modal-dialog modal-lg" role="document">
+					<div class="modal-content">
+						<div class="modal-header mh t-card">
+							<p class="modal-title mt" id="exampleModalLabel">Información Novedad </p>
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close" style="margin-top: -5px;">
+								<span aria-hidden="true">&times;</span>
+							</button>
+						</div>
+						<div class="modal-body">
+							<hr>
 							<div class="row">
 								<div class="col divM">Tipo Documento</div>
 									<div class="col divM" ><?php echo $data3->tipo_documento; ?></div>
 							</div> 
-      				<hr>
+							<hr>
 							<div class="row">
 								<div class="col divM">Documento</div>
 								<div class="col divM" ><?php echo $data3->documento; ?></div>
@@ -145,17 +146,17 @@
 								</div>
 							</div>
 						</div>
-      		</div>
+					</div>
 					<div class="modal-footer justify-content-center">
 						<button type="button" class="btn btn-outline-dark" data-dismiss="modal">Cerrar</button>
 					</div>
-      	</div>
-    	</div>
+				</div>
+			</div>
 			<!--fin modal-->
-  	
+		
 			<?php endif;?>
 
-<!--fin modal -->
+
 
 
 			<!-- Modal estado -->

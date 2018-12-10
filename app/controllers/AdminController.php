@@ -7,6 +7,7 @@ class AdminController extends Controller
     private $loginModel;
     private $rol;
     private $tablasModel;
+    private $aprenModel;
 
      /**
      * @author senov
@@ -18,6 +19,7 @@ class AdminController extends Controller
         $this->adminModel = $this->model("admin");
         $this->rolModel = $this->model("rol");
         $this->loginModel = $this->model("login");
+        $this->aprenModel = $this->model("Aprendiz");
         $this->tablasModel = $this->model("tablas");
         $this->rol = $this->rolModel->get_Roles($_SESSION["documento"]);
     }
@@ -165,6 +167,55 @@ class AdminController extends Controller
             }
         }
     }
+
+    /**
+     * @author senov
+     * Mostrar la vista de aprendiz
+    */
+    public function aprendiz($documento = null)
+    {
+        $get = array("aprendices" =>$this->aprenModel->get_Aprendices());
+        if ($documento==null) {
+            $this->view('admin/aprendiz', $this->rol, $get);
+        }else{
+            $getOne = $this->aprenModel->get_One_Aprendiz($documento);
+            $this->view('admin/aprendiz', $this->rol, $get, $getOne);
+        }
+
+        
+    }
+
+    /**
+     * @author senov
+     * Mostrar la vista de aprendiz
+    */
+    public function updateAprendiz()
+    {
+        if(isset($_POST["update"])){
+            if(isset($_POST["update"]) && isset($_POST["nombre"]) && isset($_POST["primer_apellido"]) && isset($_POST["segundo_apellido"]) && isset($_POST["email"]) && isset($_POST["telefono"])){
+                
+                $datos_update = array(
+                    "nombre" => $this->cleanData($_POST["nombre"]),
+                    "primer_apellido" => $this->cleanData($_POST["primer_apellido"]),
+                    "segundo_apellido" => $this->cleanData($_POST["segundo_apellido"]),
+                    "email" => $this->cleanData($_POST["email"]),
+                    "telefono" => $this->cleanData($_POST["telefono"]),
+                    "documento" => $this->cleanData($_POST["update"])
+                );
+                //var_dump($datos_update);
+                $res = $this->aprenModel->update_Aprendiz($datos_update);
+
+                $get = $this->aprenModel->get_Aprendices();
+                $data = array(
+                        "aprendices" => $get,
+                        "respuesta" => $res  
+                );
+                $this->view('admin/aprendiz', $this->rol, $data);
+            }
+        }
+        
+    }
+
     
     /**
      * @author senov
