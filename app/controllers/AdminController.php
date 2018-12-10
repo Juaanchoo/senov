@@ -172,14 +172,15 @@ class AdminController extends Controller
      * @author senov
      * Mostrar la vista de aprendiz
     */
-    public function aprendiz($documento = null)
+    public function aprendiz($documento = null, $res = null)
     {
         $td = $this->loginModel->all_Tipo_Documento();
         $ficha = $this->tablasModel->get_Fichas();
         $get = array(
             "aprendices" =>$this->aprenModel->get_Aprendices(),
             "tipo_documento" => $td,
-            "fichas" => $ficha);
+            "fichas" => $ficha,
+            "respuesta" => $res);
         if ($documento==null) {
             $this->view('admin/aprendiz', $this->rol, $get);
         }else{
@@ -192,6 +193,53 @@ class AdminController extends Controller
 
     /**
      * @author senov
+     * Registrar un aprendiz
+     * @param $datos_aprendiz recibe los datos del formulario
+     */
+    public function setAprendiz()
+    {
+        $td = $this->loginModel->all_Tipo_Documento();
+        $ficha = $this->tablasModel->get_Fichas();
+        $get = $this->aprenModel->get_Aprendices();
+        if(isset($_POST["documentoA"])){
+            if(isset($_POST["documentoA"]) && isset($_POST["tipo_documentoA"]) && isset($_POST["nombreA"]) && isset($_POST["primer_apellidoA"]) && isset($_POST["segundo_apellidoA"]) && isset($_POST["emailA"]) && isset($_POST["telefonoA"]) && isset($_POST["direccionA"]) && isset($_POST["fichaA"])){
+                $data_aprendiz = array(
+                    "tipo_documento" => $this->cleanData($_POST["tipo_documentoA"]),
+                    "documento" => $this->cleanData($_POST["documentoA"]),
+                    "nombre" => $this->cleanData($_POST["nombreA"]),
+                    "primer_apellido" => $this->cleanData($_POST["primer_apellidoA"]),
+                    "segundo_apellido" => $this->cleanData($_POST["segundo_apellidoA"]),
+                    "email" => $this->cleanData($_POST["emailA"]),
+                    "telefono" => $this->cleanData($_POST["telefonoA"]),
+                    "direccion" => $this->cleanData($_POST["direccionA"]),
+                    "ficha" => $this->cleanData($_POST["fichaA"]),
+                );
+
+                 $respuesta = $this->aprenModel->set_Aprendiz($data_aprendiz);
+                 $this->aprendiz(null, $respuesta);
+                
+                //var_dump($data_aprendiz);
+            }else{
+                $respuesta ="<script>swal({
+                    type: 'error',
+                    title: 'Opps..',
+                    text: 'Porfavor! llene todos los datos del formulario',
+                })</script>";
+               
+                $this->aprendiz(null, $respuesta);
+            }
+
+        }else{
+            
+            if(!isset($_POST["documentoA"])){
+                $this->aprendiz();
+            }
+        }
+
+    }
+
+    /**
+     * @author senov
      * Mostrar la vista de aprendiz
     */
     public function updateAprendiz()
@@ -199,7 +247,7 @@ class AdminController extends Controller
         $td = $this->loginModel->all_Tipo_Documento();
         $ficha = $this->tablasModel->get_Fichas();
         if(isset($_POST["update"])){
-            if(isset($_POST["update"]) && isset($_POST["nombre"]) && isset($_POST["primer_apellido"]) && isset($_POST["segundo_apellido"]) && isset($_POST["email"]) && isset($_POST["telefono"])){
+            if(isset($_POST["update"]) && isset($_POST["nombre"]) && isset($_POST["primer_apellido"]) && isset($_POST["segundo_apellido"]) && isset($_POST["email"]) && isset($_POST["telefono"]) && isset($_POST["direccion"])){
                 
                 $datos_update = array(
                     "nombre" => $this->cleanData($_POST["nombre"]),
@@ -207,6 +255,7 @@ class AdminController extends Controller
                     "segundo_apellido" => $this->cleanData($_POST["segundo_apellido"]),
                     "email" => $this->cleanData($_POST["email"]),
                     "telefono" => $this->cleanData($_POST["telefono"]),
+                    "direccion" => $this->cleanData($_POST["direccion"]),
                     "documento" => $this->cleanData($_POST["update"])
                 );
                 //var_dump($datos_update);

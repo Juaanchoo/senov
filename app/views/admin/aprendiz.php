@@ -14,9 +14,14 @@
                     </div>
                 </div>
             </div>
-            <?php 
-            if(isset($data2["respuesta"])){
-                echo $data2["respuesta"];
+            <?php
+            if(isset($_SESSION["re"]) && $_SESSION["re"]!=null){
+                echo $_SESSION["re"];
+                $_SESSION["re"] =null;
+            } 
+            if(isset($data2["respuesta"]) && $data2["respuesta"]!=null){
+                $_SESSION["re"] = $data2["respuesta"];
+                header("Location: ".URL_APP."/admin/aprendiz");
             }
                 
                 ?>
@@ -30,6 +35,7 @@
                         <th>Ficha</th>
                         <th>Telefono</th>
                         <th>Email</th>
+                        <th>Dirección</th>
                         <th>Opciones</th>
                     </tr>
                 </thead>
@@ -45,6 +51,7 @@
                                     <td>	$d->fk_id_ficha</td>
                                     <td>	$d->telefono</td>
                                     <td>	$d->email</td>
+                                    <td>	$d->direccion</td>
                                     <td> <a href='".URL_APP."/admin/aprendiz/$d->documento'>editar</a></td>
                                 </tr>";
                             }
@@ -73,7 +80,7 @@
             <!--modal registrar nuevo aprendiz-->
             <!-- Modal -->
             <div class="modal fade bd-example-modal-lg" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <form action="" class="form" method="POST">
+            <form action="<?php echo URL_APP;?>/admin/setAprendiz" class="form" method="POST">
                 <div class="modal-dialog modal-lg" role="document">
                     <div class="modal-content">
                     <div class="modal-header">
@@ -93,11 +100,11 @@
                                 <div class="form-row">
                                     <div class="form-group col-md-6">
                                         <label for="documentoA">Documento</label>
-                                        <input type="text" class="form-control" name="documentoA">
+                                        <input type="number" class="form-control" name="documentoA">
                                     </div>
                                     <div class="form-group col-md-6">
-                                        <label for="documentoA">Tipo de Documento</label>
-                                        <select name="tipo_documento" id="">
+                                        <label for="tipo_documentoA">Tipo de Documento</label>
+                                        <select name="tipo_documentoA" id="" required>
                                             <option value="">Seleccione..</option>
                                             <?php
                                                 foreach ($data2["tipo_documento"] as $td) {
@@ -110,42 +117,47 @@
                                 <div class="form-group">
                                     
                                     <label for="nombreA">Nombres</label>
-                                    <input type="text" class="form-control" name="nombreA">
+                                    <input type="text" class="form-control" name="nombreA" required>
                                     
                                 </div>
                                 <div class="form-row">
                                     <div class="form-group col-md-6">
                                         <label for="primer_apellidoA">Primer Apellido</label>
-                                        <input type="text" class="form-control" name="primer_apellidoA">
+                                        <input type="text" class="form-control" name="primer_apellidoA" required>
                                     </div>
                                     <div class="form-group col-md-6">
                                         <label for="segundo_apellidoA">Segundo Apellido</label>
-                                        <input type="text" class="form-control" name="segundo_apellidoA" id="">
+                                        <input type="text" class="form-control" name="segundo_apellidoA" id="" required>
                                     </div>
                                 </div>
 
                                 <div class="form-row">
                                     <div class="form-group col-md-6">
                                         <label for="emailA">Email</label>
-                                        <input type="text" class="form-control" name="emailA">
+                                        <input type="email" class="form-control" name="emailA" required>
                                     </div>
                                     <div class="form-group col-md-6">
                                         <label for="telefonoA">Telefono</label>
-                                        <input type="text" class="form-control" name="telefonoA" id="">
+                                        <input type="number" class="form-control" name="telefonoA" id="" required>
                                     </div>
                                 </div>
-                                <div class="form-group">
-                                    
-                                    <label for="fichaA">Seleccionar Ficha</label><br>
-                                    <select name="fichaA" id="">
-                                        <option value="">Seleccione..</option>
-                                        <?php
-                                            foreach ($data2["fichas"] as $f) {
-                                                echo "<option value='$f->id_ficha'>$f->id_ficha</option>";
-                                            }
-                                        ?>
-                                    </select>
-                                    
+                                <div class="form-row">
+                                    <div class="form-group col-md-6">
+                                        <label for="direccionA">Dirección</label>
+                                        <input type="text" class="form-control" name="direccionA" required>
+                                    </div>
+                                
+                                    <div class="form-group col-md-6">
+                                        <label for="fichaA">Seleccionar Ficha</label><br>
+                                        <select name="fichaA" id="" required>
+                                            <option value="">Seleccione..</option>
+                                            <?php
+                                                foreach ($data2["fichas"] as $f) {
+                                                    echo "<option value='$f->id_ficha'>$f->id_ficha</option>";
+                                                }
+                                            ?>
+                                        </select>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -211,7 +223,12 @@
                                 <hr>
                                 <div class="form-row">
                                     <div class="form-group col-md-4 divM">Telefono</div>
-                                    <div class="form-group col-md-7 divM" ><input type="text" class="form-control" name="telefono" value="<?php echo $data3->telefono; ?>"></div>
+                                    <div class="form-group col-md-7 divM" ><input type="number" class="form-control" name="telefono" value="<?php echo $data3->telefono; ?>"></div>
+                                </div>
+                                <hr>
+                                <div class="form-row">
+                                    <div class="form-group col-md-4 divM">Dirección</div>
+                                    <div class="form-group col-md-7 divM" ><input type="text" class="form-control" name="direccion" value="<?php echo $data3->direccion; ?>"></div>
                                 </div>
                                 <hr>
                                 <div class="form-row">
