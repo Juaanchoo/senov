@@ -14,23 +14,27 @@
 	    			<th>Documento</th>
 	    			<th>Nombre</th>
 	    			<th>Apellido</th>
-	    			<th>Tipo novedad</th>
+	    			<th>Ficha</th>
+	    			<th>Tipo Novedad</th>
+	    			<th>Acta Novedad </th>
 	    			<th>Opciones</th>
 	    		</tr>
 	    	</thead>
 	    	<tbody class="text-center">
 					<?php
-					var_dump($data2);
-						// foreach ($data2 as $d) {
-						// 	echo "<tr>
-						// 		<td>	$d->id_novedad</td>
-						// 		<td>	$d->documento</td>
-						// 		<td>	$d->nombre</td>
-						// 		<td>	$d->primer_apellido</td>
-						// 		<td>	$d->novedad</td>
-						// 		<td> <a href='".URL_APP."/admin/estado_Novedad/$d->id_novedad'>Ver mas</a></td>
-						// 	</tr>";
-						// }
+					//var_dump($data2);
+						foreach ($data2 as $d) {
+							echo "<tr>
+								<td>	$d->id_novedad</td>
+								<td>	$d->documento</td>
+								<td>	$d->nombre</td>
+								<td>	$d->primer_apellido</td>
+								<td>	$d->fk_id_ficha</td>
+								<td>	$d->novedad</td>
+								<td> <a href=''>Generar PDF</a></td>
+								<td> <a href='".URL_APP."/admin/estado_Novedad/$d->id_novedad'>Ver mas</a></td>
+							</tr>";
+						}
 					?>
 	    	</tbody>
 	    </table>
@@ -97,7 +101,7 @@
 							<hr>
 							<div class="row">
 								<div class="col divM">Codigo Ficha</div>
-								<div class="col divM" ><?php echo $data3->codigo_ficha; ?></div>
+								<div class="col divM" ><?php echo $data3->fk_id_ficha; ?></div>
 							</div>
 							<hr>
 							<div class="row">
@@ -107,28 +111,28 @@
 							<hr>
 							<div class="row">
 								<div class="col divM">Acta Novedad</div>
-								<div class="col divM" ><?php echo $data3->acta_novedad; ?></div>
+								<div class="col divM" > <a href="">Generar Pdf</a></div>
 							</div>
 							<hr>
 							<div class="row">
 								<div class="col divM">Fecha Inicio</div>
 								<div class="col divM" ><?php echo $data3->fecha_inicio ?></div>
 							</div>
-							<hr>
+							<!-- <hr>
 							<div class="row">
 								<div class="col divM">Fecha Final</div>
 								<div class="col divM" ><?php echo $data3->fecha_final; ?></div>
-							</div>
+							</div> -->
 							<hr>
 							<div class="row">
-								<div class="col divM">Estado</div>
+								<div class="col divM">Estado Novedad</div>
 								<div class="col divM">
-									<?php if ($data3->estado == "En tramite") {
+									<?php if ($data3->estado_novedad == "En tramite") {
 										echo '<span  class="badge badge-info" >En tramite</span>';
 									}
 									?>
-									<?php if ($data3->estado == "Aprobado") { echo '<span class="badge badge-success" >Aprobado</span>';}?>
-									<?php if ($data3->estado == "No Aprobado") { echo '<span  class="badge badge-danger" >No Aprobado</span>';}?>
+									<?php if ($data3->estado_novedad == "Aprobado") { echo '<span class="badge badge-success" >Aprobado</span>';}?>
+									<?php if ($data3->estado_novedad == "No Aprobado") { echo '<span  class="badge badge-danger" >No Aprobado</span>';}?>
 								<div class="btn-group dropright">
 									<button type="button" class="btn btn-secondary " data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 										<i class="fas fa-cog"></i>

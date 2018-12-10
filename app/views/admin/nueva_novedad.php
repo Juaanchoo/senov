@@ -12,11 +12,11 @@
                      
 					
                   	<div class="form-row">
-
+					<?php if(!empty($data3)){ echo $data3;}?>
 					  	<div class="form-group col-md-6">
 							<label for="tipo_novedad">Tipos de Novedad</label>
-							<select name="tipo_novedad" id="tipo_novedad">
-									<option disabled selected value="">Seleccione..</option>
+							<select name="tipo_novedad" id="select">
+									<option disabled selected >Seleccione..</option>
 									<?php 
 										foreach ($data2["tipo_novedades"] as $n) {
 											echo '<option value="'.$n->id_novedad.'">'.$n->novedad.'</option>';
@@ -41,7 +41,7 @@
                   	</div>
 					<div class="form-group">
 						<label for="documento">Documento</label>
-					    <input name="dni" type="text" class="form-control" id="documento" value="<?php echo isset($_REQUEST['dni']) ? $_REQUEST['dni'] : '';  ?>" placeholder="Documento..." required autocomplete="off">
+					    <input name="documento" type="text" class="form-control" id="documento" value="<?php echo isset($_REQUEST['dni']) ? $_REQUEST['dni'] : '';  ?>" placeholder="Documento..." required autocomplete="off">
 
 					</div>
 					<div class="form-row">
@@ -66,13 +66,46 @@
 					  	</div>
 						
 					</div>
-					<div class="form-group">
-						<label for="documento">Nueva Jornada</label>
-					    <textarea name="nueva_jornada"  class="form-control" id="nueva_jornada" placeholder="Nueva Jornada.." required autocomplete="off"></textarea>
-					</div>
-					<div class="form-group">
-						<label for="documento">Nueva Ficha</label>
-					    <textarea name="nueva_ficha"  class="form-control" id="nueva_ficha" placeholder="Nueva Ficha..." required autocomplete="off"></textarea>
+					<div id="jas">
+						<div id="2">
+							<div class="form-group">
+								<label for="documento">Nueva Jornada</label>
+								<select name="nueva_jornada">
+										<option selected disabled value="">Seleccione..</option>
+										<?php
+											foreach ($data2["jornada"] as $jor ) {
+												echo "<option value='".$jor->id_jornada."'>".$jor->jornada."</option>";
+											}
+										?>
+								</select>
+							</div>
+						</div>
+						<div id="4">
+							<div class="form-group">
+								<label for="documento">Nueva Ficha</label>
+								<select name="nueva_ficha" id="">
+									<option selected disabled value="">Seleccione..</option>
+										<?php
+											foreach ($data2["fichas"] as $f ) {
+												echo "<option value='".$f->id_ficha."'>".$f->id_ficha."</option>";
+											}
+										?>
+								</select>
+							</div>
+						</div>
+						<div id="5">
+							<div class="form-group">
+								<label for="documento">Nueva Ficha</label>
+								<select name="nueva_ficha" id="">
+									<option selected disabled value="">Seleccione..</option>
+										<?php
+											foreach ($data2["fichas"] as $f ) {
+												echo "<option value='".$f->id_ficha."'>".$f->id_ficha."</option>";
+											}
+										?>
+								</select>
+							</div>
+						</div>
 					</div>
 					<br>
 					  	<button type="submit" class="btn btn-login col-4">Registrar Novedad</button>
@@ -261,4 +294,5 @@ select:focus{
 } */
 </style>
 <script src="<?php echo URL_APP;?>/public/js/files.js"></script>
+<script src="<?php echo URL_APP;?>/public/js/nueva_nov.js"></script>
 <?php include_once sidebar_p2; ?>
