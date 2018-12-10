@@ -174,7 +174,12 @@ class AdminController extends Controller
     */
     public function aprendiz($documento = null)
     {
-        $get = array("aprendices" =>$this->aprenModel->get_Aprendices());
+        $td = $this->loginModel->all_Tipo_Documento();
+        $ficha = $this->tablasModel->get_Fichas();
+        $get = array(
+            "aprendices" =>$this->aprenModel->get_Aprendices(),
+            "tipo_documento" => $td,
+            "fichas" => $ficha);
         if ($documento==null) {
             $this->view('admin/aprendiz', $this->rol, $get);
         }else{
@@ -191,6 +196,8 @@ class AdminController extends Controller
     */
     public function updateAprendiz()
     {
+        $td = $this->loginModel->all_Tipo_Documento();
+        $ficha = $this->tablasModel->get_Fichas();
         if(isset($_POST["update"])){
             if(isset($_POST["update"]) && isset($_POST["nombre"]) && isset($_POST["primer_apellido"]) && isset($_POST["segundo_apellido"]) && isset($_POST["email"]) && isset($_POST["telefono"])){
                 
@@ -208,7 +215,9 @@ class AdminController extends Controller
                 $get = $this->aprenModel->get_Aprendices();
                 $data = array(
                         "aprendices" => $get,
-                        "respuesta" => $res  
+                        "respuesta" => $res,
+                        "tipo_documento" => $td,
+                        "fichas" => $ficha 
                 );
                 $this->view('admin/aprendiz', $this->rol, $data);
             }

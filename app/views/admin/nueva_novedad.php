@@ -6,7 +6,7 @@
 				<p style="margin-right:550px">Registrar Novedad</p>
 				<button type="submit" class="btn btn-volver"><a href="<?php echo URL_APP?>"><i class="fas fa-undo-alt"></i> Volver</a></button>
         	</div>
-			<div class="row border rounded bg-white shadow" style="height: 700px; width: 920px;">
+			<div class="row border rounded bg-white shadow" style="height: 580px; width: 920px;">
 				<div class="col-12 app-p">
 					<form class="form" action="" method="post">
                      
@@ -41,27 +41,27 @@
                   	</div>
 					<div class="form-group">
 						<label for="documento">Documento</label>
-					    <input name="documento" type="text" class="form-control" id="documento" value="<?php echo isset($_REQUEST['dni']) ? $_REQUEST['dni'] : '';  ?>" placeholder="Documento..." required autocomplete="off">
+					    <input name="documento" type="text" class="form-control" id="documento" value="<?php echo isset($_REQUEST['documento']) ? $_REQUEST['documento'] : '';  ?>" placeholder="Documento..." required autocomplete="off">
 
 					</div>
 					<div class="form-row">
 						<div class="form-group col-md-6">
-							<label for="documento">Motivo</label>
+							<label for="motivo">Motivo</label>
 					    	<textarea name="motivo"  class="form-control" id="motivo" placeholder="Motivo..." required autocomplete="off"></textarea>
 					  	</div>
 						<div class="form-group col-md-6">
-					    	<label for="documento">Comentarios del responsable</label>
+					    	<label for="comentarios">Comentarios del responsable</label>
 					    	<textarea name="comentarios"  class="form-control" id="comentarios" placeholder="Comentarios del responsable..." required autocomplete="off"></textarea>
 					  	</div>
 						
 					</div>
 					<div class="form-row">
 						<div class="form-group col-md-6">
-							<label for="documento">Recomendaciones</label>
+							<label for="recomendaciones">Recomendaciones</label>
 					    	<textarea name="recomendaciones"  class="form-control" id="recomendaciones" placeholder="Recomendaciones.." required autocomplete="off"></textarea>
 					  	</div>
 						<div class="form-group col-md-6">
-					    	<label for="documento">Evidencias</label>
+					    	<label for="evidencias">Evidencias</label>
 					    	<textarea name="evidencias"  class="form-control" id="evidencias" placeholder="Evidencias..." required autocomplete="off"></textarea>
 					  	</div>
 						
@@ -69,7 +69,7 @@
 					<div id="jas">
 						<div id="2">
 							<div class="form-group">
-								<label for="documento">Nueva Jornada</label>
+								<label for="nueva_jornada">Nueva Jornada</label>
 								<select name="nueva_jornada">
 										<option selected disabled value="">Seleccione..</option>
 										<?php
@@ -82,7 +82,7 @@
 						</div>
 						<div id="4">
 							<div class="form-group">
-								<label for="documento">Nueva Ficha</label>
+								<label for="nueva_ficha">Nueva Ficha</label>
 								<select name="nueva_ficha" id="">
 									<option selected disabled value="">Seleccione..</option>
 										<?php
@@ -95,7 +95,7 @@
 						</div>
 						<div id="5">
 							<div class="form-group">
-								<label for="documento">Nueva Ficha</label>
+								<label for="nueva_ficha">Nueva Ficha</label>
 								<select name="nueva_ficha" id="">
 									<option selected disabled value="">Seleccione..</option>
 										<?php
