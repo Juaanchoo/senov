@@ -21,7 +21,7 @@ class HomeController extends Controller
     public function registrar()
     {
         if(isset($_POST["dni"])){
-            if(isset($_POST["tipo_documento"]) && isset($_POST["nombre"]) && isset($_POST["primer_apellido"]) && isset($_POST["segundo_apellido"]) && isset($_POST["email"]) && isset($_POST["telefono"]) && isset($_POST["password"]) && $_POST["password"] == $_POST["password2"]){
+            if(isset($_POST["tipo_documento"]) && isset($_POST["nombre"]) && isset($_POST["primer_apellido"]) && isset($_POST["segundo_apellido"]) && isset($_POST["email"]) && isset($_POST["telefono"])  && isset($_POST["direccion"]) && isset($_POST["password"]) && $_POST["password"] == $_POST["password2"]){
                 $info_usuario = array(
                     'tipo_documento'=> $this->cleanData($_POST["tipo_documento"]),
                     'dni'=> $this->cleanData($_POST["dni"]),
@@ -29,6 +29,7 @@ class HomeController extends Controller
                     'primer_apellido'=> $this->cleanData($_POST["primer_apellido"]),
                     'segundo_apellido'=> $this->cleanData($_POST["segundo_apellido"]),
                     'telefono'=> $this->cleanData($_POST["telefono"]),
+                    'direccion'=> $this->cleanData($_POST["direccion"]),
                     'email'=> $this->cleanData($_POST["email"]), 
                     'password'=> $this->cleanData($_POST["password"])
                 );

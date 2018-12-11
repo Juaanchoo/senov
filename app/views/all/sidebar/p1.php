@@ -63,13 +63,13 @@
 					<li>
 						<a href="<?php echo URL_APP; ?>/admin/aprendiz" title="Gestion de Aprendices">
 							<div class="barra"></div>
-							<span><i class="fas fa-link mr-2"></i>Aprendiz</span>
+							<span><i class="fas fa-link mr-2"></i>Gestion de Aprendices</span>
 						</a>
 					</li>
 					<li>
-						<a href="<?php echo URL_APP; ?>/admin/logout" title="Salir">
+						<a href="<?php echo URL_APP; ?>/admin/usuarios_admin" title="Gestion de usuarios">
 							<div class="barra"></div>
-							<span><i class="fas fa-link mr-2"></i>Salir</span>
+							<span><i class="fas fa-link mr-2"></i>Gestion de Usuarios</span>
 						</a>
 					</li>
 					<li>

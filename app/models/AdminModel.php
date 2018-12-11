@@ -233,7 +233,22 @@ class AdminModel extends DataBase{
         }
     }
 
-    
+    /**
+     * @author senov
+     * Cuenta las novedades en estado "En tramite"
+     */
+    public function contar_novedad()
+    { 
+        try{
+            $sql="SELECT COUNT(*) AS counter FROM novedades WHERE fk_id_estado = ?";
+            $this->db->query($sql);
+            $this->db->bind(1, 1);
+            return $this->db->getOne();
+
+        }catch(Exception $e){
+            return "Admin_contar_Novedad_DATABASE ERROR";
+        }
+    }
 }
 
 

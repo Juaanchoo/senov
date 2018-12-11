@@ -77,7 +77,7 @@ class LoginModel extends DataBase
 			// }
 			if(!empty($hab) && $hab->fk_id_tipo_documento == $info_usuario["tipo_documento"]){
 				if(!empty($hab) && $hab->documento == $info_usuario["dni"] && $usu == false){
-				$sql="INSERT INTO `usuarios_admin`(`fk_id_tipo_documento`, `documento`, `nombre`, `primer_apellido`,`segundo_apellido`, `email`, `telefono`, `password`) VALUES (?,?,?,?,?,?,?,?)";
+				$sql="INSERT INTO `usuarios_admin`(`fk_id_tipo_documento`, `documento`, `nombre`, `primer_apellido`,`segundo_apellido`, `email`, `telefono`, `direccion`, `password`) VALUES (?,?,?,?,?,?,?,?,?)";
 				$this->db->query($sql);
 				$this->db->bind(1,$info_usuario["tipo_documento"]);
 				$this->db->bind(2,$info_usuario["dni"]);
@@ -86,7 +86,8 @@ class LoginModel extends DataBase
 				$this->db->bind(5,$info_usuario["segundo_apellido"]);
 				$this->db->bind(6,$info_usuario["email"]);
 				$this->db->bind(7,$info_usuario["telefono"]);
-				$this->db->bind(8,$info_usuario["password"]);
+				$this->db->bind(8,$info_usuario["direccion"]);
+				$this->db->bind(9,$info_usuario["password"]);
 				if($this->db->execute()){
 					$sql2 = "INSERT INTO permiso_cargo (fk_id_cargo, fk_documento) VALUES (?,?)";
 					$this->db->query($sql2);

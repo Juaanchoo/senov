@@ -107,10 +107,11 @@ class AprendizModel extends DataBase{
             usu.`segundo_apellido`, usu.`email`, usu.`telefono`, usu.`direccion`, usu.`fk_id_ficha`, usu.`estado` 
             FROM `usuarios_admin` AS usu INNER JOIN permiso_cargo AS pc ON usu.documento=pc.fk_documento 
             INNER JOIN tipo_documento AS td ON usu.fk_id_tipo_documento=td.id_tipo_documento 
-            WHERE pc.fk_id_cargo=5 AND usu.documento= ?";
+            WHERE pc.fk_id_cargo=? AND usu.documento= ?";
 
             $this->db->query($sql);
-            $this->db->bind(1, $documento);
+            $this->db->bind(1, 5);
+            $this->db->bind(2, $documento);
             $get = $this->db->getOne();
             if($get==true){
                 return $get;

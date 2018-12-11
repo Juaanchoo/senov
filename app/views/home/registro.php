@@ -48,9 +48,15 @@
 					    <label for="email">Email</label>
 					    <input name="email" type="email" class="form-control" id="email" placeholder="Email..." value="<?php echo isset($_REQUEST['email']) ? $_REQUEST['email'] : '';  ?>" required>
 					  </div>
-                      <div class="form-group">
-					    <label for="telefono">Télefono</label>
-					    <input name="telefono" type="text" class="form-control" id="telefono" placeholder="Telefono..." value="<?php echo isset($_REQUEST['telefono']) ? $_REQUEST['telefono'] : '';  ?>" required>
+					  <div class="form-row">
+						<div class="form-group col-md-6">
+							<label for="telefono">Télefono</label>
+							<input name="telefono" type="text" class="form-control" id="telefono" placeholder="Telefono..." value="<?php echo isset($_REQUEST['telefono']) ? $_REQUEST['telefono'] : '';  ?>" required>
+						</div>
+						<div class="form-group col-md-6">
+							<label for="direccion">Dirección</label>
+							<input name="direccion" type="text" class="form-control" id="direccion" placeholder="Direccion..." value="<?php echo isset($_REQUEST['direccion']) ? $_REQUEST['direccion'] : '';  ?>" required>
+						</div>
 					  </div>
                       <div class="form-group">
 					    <label for="password">Contraseña</label>

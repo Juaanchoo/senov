@@ -8,6 +8,7 @@ class AdminController extends Controller
     private $rol;
     private $tablasModel;
     private $aprenModel;
+    private $usuariosModel;
 
      /**
      * @author senov
@@ -17,6 +18,7 @@ class AdminController extends Controller
     function __construct(){
         Security::auth('Administrador');
         $this->adminModel = $this->model("admin");
+        $this->usuariosModel = $this->model("usuarios");
         $this->rolModel = $this->model("rol");
         $this->loginModel = $this->model("login");
         $this->aprenModel = $this->model("Aprendiz");
@@ -30,7 +32,8 @@ class AdminController extends Controller
      * @return respuesta de éxito o error
      */
     public function index(){
-        $this->view('admin/home', $this->rol);
+        $cont = $this->adminModel->contar_Novedad();
+        $this->view('admin/home', $this->rol, $cont);
     }
 
      /**
@@ -274,7 +277,116 @@ class AdminController extends Controller
         
     }
 
+    /**
+     * @author senov
+     * Lleva a la vista de los usuarios
+     * @param $documento, $respuesta
+     */
+    public function usuarios_admin($documento = null, $respuesta = null){
+        $td = $this->loginModel->all_Tipo_Documento();
+        $get_usu = $this->usuariosModel->get_Usuarios();
+        $data = array(
+            "usuarios" => $get_usu,
+            "respuesta" => $respuesta,
+            "tipo_documento" => $td,
+        );
+        if($documento == null){
+            $this->view('admin/usuarios_admin', $this->rol, $data);
+        }else{
+            $getOne = $this->usuariosModel->get_One_Usuario($documento);
+            $this->view('admin/usuarios_admin', $this->rol, $data, $getOne);
+        }
+    }
+
+    public function setUsuario()
+    {
+        if(isset($_POST["documentoU"])){
+            if(isset($_POST["tipo_documentoU"]) && isset($_POST["nombreU"]) && isset($_POST["primer_apellidoU"]) && isset($_POST["segundo_apellidoU"]) && isset($_POST["emailU"]) && isset($_POST["telefonoU"])  && isset($_POST["direccionU"]) && isset($_POST["password"]) && $_POST["password"] == $_POST["password2"]){
+                $info_usuario = array(
+                    'tipo_documento'=> $this->cleanData($_POST["tipo_documentoU"]),
+                    'documento'=> $this->cleanData($_POST["documentoU"]),
+                    'nombre'=> $this->cleanData($_POST["nombreU"]),
+                    'primer_apellido'=> $this->cleanData($_POST["primer_apellidoU"]),
+                    'segundo_apellido'=> $this->cleanData($_POST["segundo_apellidoU"]),
+                    'telefono'=> $this->cleanData($_POST["telefonoU"]),
+                    'direccion'=> $this->cleanData($_POST["direccionU"]),
+                    'email'=> $this->cleanData($_POST["emailU"]), 
+                    'password'=> $_POST["password"],
+                );
+                $res =  $this->usuariosModel->set_Usuario($info_usuario);
+                $this->usuarios_admin(null,$res);
+            }else { 
+            //devolver diferente respuesta
+            $res = "<script>swal({
+				type: 'error',
+				title: 'Opps..',
+				text: 'Error en lo datos del registro',
+              })</script>";
+              $this->usuarios_admin(null,$res);
+            }
+        }else{
+            $res = "<script>swal({
+				type: 'error',
+				title: 'Opps..',
+				text: 'Debe ingresar documento',
+              })</script>";
+            $this->usuarios_admin(null, $res);
+        }
+    }
+
+     /**
+     * @author senov
+     * Actualizar la informacion de un usuario
+    */
+    public function updateUsuario()
+    {
+        $td = $this->loginModel->all_Tipo_Documento();
+        $ficha = $this->tablasModel->get_Fichas();
+        if(isset($_POST["update"])){
+            if(isset($_POST["update"]) && isset($_POST["nombre"]) && isset($_POST["primer_apellido"]) && isset($_POST["segundo_apellido"]) && isset($_POST["email"]) && isset($_POST["telefono"]) && isset($_POST["direccion"])){
+                
+                $datos_update = array(
+                    "nombre" => $this->cleanData($_POST["nombre"]),
+                    "primer_apellido" => $this->cleanData($_POST["primer_apellido"]),
+                    "segundo_apellido" => $this->cleanData($_POST["segundo_apellido"]),
+                    "email" => $this->cleanData($_POST["email"]),
+                    "telefono" => $this->cleanData($_POST["telefono"]),
+                    "direccion" => $this->cleanData($_POST["direccion"]),
+                    "documento" => $this->cleanData($_POST["update"])
+                );
+                //var_dump($datos_update);
+                $res = $this->usuariosModel->update_Usuario($datos_update);
+                $this->usuarios_admin(null, $res);
+            }else{
+                $res="<script>swal({
+                    type: 'error',
+                    title: 'Opps..',
+                    text: 'Porfavor! llene todos los datos del formulario',
+                })</script>";
+                $this->usuarios_admin(null, $res);
+            }
+        }
+        
+    }
     
+    /**
+     * @author senov
+     * habilita a un nuevo usuario para que se pueda registrar
+     * 
+     */
+    public function habilitarUsuario(){
+        if(isset($_POST["habDoc"]) && isset($_POST["tipo_documentoHab"])){
+            $res = $this->usuariosModel->habilitar_Usuario($_POST["habDoc"], $_POST["tipo_documentoHab"]);
+            $this->usuarios_admin(null, $res);
+        }else{
+            $res="<script>swal({
+                type: 'error',
+                title: 'Opps..',
+                text: 'Porfavor! Ingrese los todos datos',
+            })</script>";
+            $this->usuarios_admin(null, $res);
+        }
+    } 
     /**
      * @author senov
      * Cerrar la sesión y lleva al inicio
