@@ -233,6 +233,24 @@ class AdminModel extends DataBase{
         }
     }
 
+    public function PDF_Aplazamiento($id){
+        try{
+            $this->db->query(
+            "SELECT * FROM novedades AS n INNER join usuarios_admin AS usu on n.documento=usu.documento 
+            INNER JOIN fichas AS f on usu.fk_id_ficha=f.id_ficha 
+            INNER JOIN programa_formacion As pf on f.fk_id_programa_formacion=pf.id_programa_formacion 
+            INNER JOIN jornada AS j on f.fk_id_jornada=j.id_jornada 
+            INNER JOIN sede AS s on f.fk_id_sede= s.id_sede 
+            INNER join tipo_documento AS td on usu.fk_id_tipo_documento = td.id_tipo_documento 
+            WHERE id_novedad=?");
+            $this->db->bind(1,$id);
+            $resultado=$this->db->getOne();
+            return $resultado;
+        }catch(PDOException $e){
+            die($e->getMessage());
+        }
+    }
+
     /**
      * @author senov
      * Cuenta las novedades en estado "En tramite"
@@ -240,6 +258,7 @@ class AdminModel extends DataBase{
     public function contar_novedad()
     { 
         try{
+            $s = "SELECT * FROM novedades AS n INNER join usuarios_admin AS usu on n.documento=usu.documento INNER JOIN fichas AS f on usu.fk_id_ficha=f.id_ficha INNER JOIN programa_formacion As pf on f.fk_id_programa_formacion=pf.id_programa_formacion INNER JOIN jornada AS j on f.fk_id_jornada=j.id_jornada INNER JOIN sede AS s on f.fk_id_sede= s.id_sede INNER join tipo_documento AS td on usu.fk_id_tipo_documento = td.id_tipo_documento WHERE id_novedad=18";
             $sql="SELECT COUNT(*) AS counter FROM novedades WHERE fk_id_estado = ?";
             $this->db->query($sql);
             $this->db->bind(1, 1);

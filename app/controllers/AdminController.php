@@ -387,6 +387,86 @@ class AdminController extends Controller
             $this->usuarios_admin(null, $res);
         }
     } 
+
+    /**
+     * @author senov
+     * hacer PDF de aplazamiento
+     */
+    public function PDFAplazamiento($idnovedad)
+    {
+        ob_clean(); 
+        require 'PdfController.php';
+        $novedad=$this->adminModel->PDF_Aplazamiento($idnovedad);
+        $pdf= new PdfController;
+        $pdf->novedad($novedad);
+    }
+
+    /**
+     * @author senov
+     * hacer PDF de Retiro Voluntario
+     */
+    public function PDFRetiroVoluntario($idnovedad)
+    {
+        ob_clean(); 
+        require 'PdfController.php';
+        $novedad=$this->adminModel->PDF_Aplazamiento($idnovedad);
+        $pdf= new PdfController;
+        $pdf->novedad($novedad);
+    }
+
+    /**
+     * @author senov
+     * hacer PDF de Cambio de Jornada
+     */
+    public function PDFcambioJ($idnovedad)
+    {
+        ob_clean(); 
+        require 'PdfController.php';
+        $novedad=$this->adminModel->PDF_Aplazamiento($idnovedad);
+        $pdf= new PdfController;
+        $pdf->PDFCambioJ($novedad);
+    }
+
+    /**
+     * @author senov
+     * hacer PDF de Reintegro
+     */
+    public function PDFreintegro($idnovedad)
+    {
+        ob_clean(); 
+        require 'PdfController.php';
+        $novedad=$this->adminModel->PDF_Aplazamiento($idnovedad);
+        $pdf= new PdfController;
+        $pdf->novedades($novedad);
+    }
+    
+    /**
+     * @author senov
+     * hacer PDF de traslado
+     */
+    public function PDFTraslado($idnovedad)
+    {
+        ob_clean(); 
+        require 'PdfController.php';
+        $novedad=$this->adminModel->PDF_Aplazamiento($idnovedad);
+        $pdf= new PdfController;
+        $pdf->novedades($novedad);
+    }
+
+    /**
+     * @author senov
+     * hacer PDF de Deserción
+     */
+    public function PDFdesercion($idnovedad)
+    {
+        ob_clean(); 
+        require 'PdfController.php';
+        $novedad=$this->adminModel->PDF_desercion($idnovedad);
+        // var_dump($novedad  );
+        $pdf= new PdfController;
+        $pdf->desercion($novedad);
+    }
+
     /**
      * @author senov
      * Cerrar la sesión y lleva al inicio

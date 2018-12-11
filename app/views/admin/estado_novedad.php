@@ -3,10 +3,18 @@
 	<div class="card shadow">
 		<h5 class="card-header t-card">Novedades</h5>
 		<div class="card-body">
-			<div class="search-form">
-				<span>Buscar:</span>
-				<input type="text" placeholder="Buscar...">
-			</div>
+		<div class="row">
+                <div class="col-md-6">
+                    <a href="" data-toggle="modal" data-target="#ModalDeser" class="btn btn-outline-dark">Registrar Deserción &nbsp;<i class="fas fa-plus"></i></a>
+                </div>
+                
+                <div class="col-md-6">
+                    <div class="search-form">
+                        <span>Buscar:</span>
+                        <input type="text" placeholder="Buscar...">
+                    </div>
+                </div>
+            </div>
 			<table class="table table-bordered table-striped">
 				<thead class="text-center">
 					<tr>
@@ -16,7 +24,6 @@
 						<th>Apellido</th>
 						<th>Ficha</th>
 						<th>Tipo Novedad</th>
-						<th>Acta Novedad </th>
 						<th>Opciones</th>
 					</tr>
 				</thead>
@@ -31,7 +38,6 @@
 									<td>	$d->primer_apellido</td>
 									<td>	$d->fk_id_ficha</td>
 									<td>	$d->novedad</td>
-									<td> <a href=''>Generar PDF</a></td>
 									<td> <a href='".URL_APP."/admin/estado_Novedad/$d->id_novedad'>Ver mas</a></td>
 								</tr>";
 							}
@@ -112,7 +118,28 @@
 							<hr>
 							<div class="row">
 								<div class="col divM">Acta Novedad</div>
-								<div class="col divM" > <a href="">Generar Pdf</a></div>
+								<div class="col divM" >
+									<?php 
+										if($data3->novedad == "APLAZAMIENTO"){
+											echo "<a href='".URL_APP."/admin/PDFAplazamiento/".$data3->id_novedad."'>Generar Pdf</a>";
+										}
+										if($data3->novedad == "TRASLADO"){
+											echo "<a href='".URL_APP."/admin/PDFTraslado/".$data3->id_novedad."'>Generar Pdf</a>";
+										}
+										if($data3->novedad == "RETIRO VOLUNTARIO"){
+											echo "<a href='".URL_APP."/admin/PDFRetiroVoluntario/".$data3->id_novedad."'>Generar Pdf</a>";
+										}
+										if($data3->novedad == "CAMBIO DE JORNADA"){
+											echo "<a href='".URL_APP."/admin/PDFcambioJ/".$data3->id_novedad."'>Generar Pdf</a>";
+										}
+										if($data3->novedad == "REINTEGRO"){
+											echo "<a href='".URL_APP."/admin/PDFreintegro/".$data3->id_novedad."'>Generar Pdf</a>";
+										}
+										if($data3->novedad == "DESERCION"){
+											echo "<a href='".URL_APP."/admin/PDFdesercion/".$data3->id_novedad."'>Generar Pdf</a>";
+										}
+									?> 
+								</div>
 							</div>
 							<hr>
 							<div class="row">
