@@ -42,6 +42,12 @@ class Controller
         return $data;
     }
 
+    public function mostrar($dato)
+    {
+        $dato=ucwords(mb_strtolower($dato));
+        return $dato;
+    }	
+
 
     function fecha_utc() {
         date_default_timezone_set("UTC");

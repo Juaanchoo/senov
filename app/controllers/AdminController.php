@@ -16,7 +16,7 @@ class AdminController extends Controller
      * @return respuesta de éxito o error
      */
     function __construct(){
-        Security::auth('Administrador');
+        Security::auth('1');
         $this->adminModel = $this->model("admin");
         $this->usuariosModel = $this->model("usuarios");
         $this->rolModel = $this->model("rol");
@@ -311,7 +311,7 @@ class AdminController extends Controller
                     'telefono'=> $this->cleanData($_POST["telefonoU"]),
                     'direccion'=> $this->cleanData($_POST["direccionU"]),
                     'email'=> $this->cleanData($_POST["emailU"]), 
-                    'password'=> $_POST["password"],
+                    'password'=> md5($_POST["password"]),
                 );
                 $res =  $this->usuariosModel->set_Usuario($info_usuario);
                 $this->usuarios_admin(null,$res);

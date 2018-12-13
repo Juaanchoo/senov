@@ -12,7 +12,7 @@ class LoginModel extends DataBase
 	
 	public function show($id){
 		$sql = 'SELECT nombre, primer_apellido, segundo_apellido, documento, password FROM usuarios_admin WHERE documento = ?';
-		$sql2 = 'SELECT tipc.cargo
+		$sql2 = 'SELECT tipc.cargo, tipc.id_cargo
 		FROM `permiso_cargo` as perc 
 		INNER JOIN tipo_cargo as tipc 
 		ON perc.fk_id_cargo = tipc.id_cargo WHERE perc.fk_documento = ?';
@@ -27,10 +27,10 @@ class LoginModel extends DataBase
 		$this->db->bind(1,$user->documento);
 		$a = $this->db->getAll();
 		for ($i=0; $i < count($a); $i++) { 
-			$p[] = $a[$i]->cargo;
+			$p[] = $a[$i]->id_cargo;
 		}		
 		$user->permisos = $p;
-		//var_dump($user); ARREGLAR EL LOGIN Y PASAR ENTRE ROLES
+		//var_dump($user); //ARREGLAR EL LOGIN Y PASAR ENTRE ROLES
 		return $user;
 	}
 

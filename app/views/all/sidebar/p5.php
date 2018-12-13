@@ -17,7 +17,7 @@
 		
 		<div class="col-9">
 		 <button class="btn" style="color: white; float: right; margin-top: 13px; background-color: #000 !important;">
-			 USUARIO: <?php echo $_SESSION["nombre"].' '. $_SESSION["documento"];?>
+			 INVITADO: <?php echo $_SESSION["nombre"].' '. $_SESSION["documento"];?>
 		 </button>
 		</div>
 		
@@ -30,7 +30,7 @@
 				
 				<div class="form-group p-4">
 				    <select class="form-control" onChange="cambiarRol(this)">
-				      <option value="3">Usuario</option>
+				      <option value="3" SELECTED>Invitado</option>
 					  <?php 
 					  
 					 	foreach ($data as $r) {

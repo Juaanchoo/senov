@@ -43,17 +43,17 @@
                         <?php
                         //var_dump($data2);
                             foreach ($data2["aprendices"] as $d) {
-                                echo "<tr>
-                                    <td>	$d->tipo_documento</td>
-                                    <td>	$d->documento</td>
-                                    <td>	$d->nombre</td>
-                                    <td>	$d->primer_apellido"." ".$d->segundo_apellido."</td>
-                                    <td>	$d->fk_id_ficha</td>
-                                    <td>	$d->telefono</td>
-                                    <td>	$d->email</td>
-                                    <td>	$d->direccion</td>
-                                    <td> <a href='".URL_APP."/admin/aprendiz/$d->documento'>editar</a></td>
-                                </tr>";
+                                echo '<tr>
+                                    <td>	'.$this->mostrar($d->tipo_documento).'</td>
+                                    <td>	'.$d->documento.'</td>
+                                    <td>	'.$this->mostrar($d->nombre).'</td>
+                                    <td>	'.$this->mostrar($d->primer_apellido).' '.$this->mostrar($d->segundo_apellido).'</td>
+                                    <td>	'.$this->mostrar($d->fk_id_ficha).'</td>
+                                    <td>	'.$this->mostrar($d->telefono).'</td>
+                                    <td>	'.$this->mostrar($d->email).'</td>
+                                    <td>	'.$this->mostrar($d->direccion).'</td>
+                                    <td> <a href="'.URL_APP.'/admin/aprendiz/'.$d->documento.'">editar</a></td>
+                                </tr>';
                             }
                         ?>
                 </tbody>
@@ -190,7 +190,7 @@
                                 <hr>
                                 <div class="form-row">
                                     <div class="form-group col-md-4  divM">Tipo Documento</div>
-                                    <div class="form-group col-md-7  divM" ><?php echo $data3->tipo_documento; ?></div>
+                                    <div class="form-group col-md-7  divM" ><?php echo $this->mostrar($data3->tipo_documento); ?></div>
                                 </div> 
                                 <hr>
                                 <div class="form-row">
@@ -203,37 +203,37 @@
                                 <hr>
                                 <div class="form-row">
                                     <div class="form-group col-md-4  divM">Nombre</div>
-                                    <div class="form-group col-md-7  divM" ><input type="text" class="form-control" name="nombre" value="<?php echo $data3->nombre; ?>"></div>
+                                    <div class="form-group col-md-7  divM" ><input type="text" class="form-control" name="nombre" value="<?php echo $this->mostrar($data3->nombre); ?>"></div>
                                 </div>
                                 <hr>
                                 <div class="form-row">
                                     <div class="form-group col-md-4  divM">Primer Apellido</div>
-                                    <div class="form-group col-md-7  divM" ><input type="text" class="form-control" name="primer_apellido" value="<?php echo $data3->primer_apellido; ?>"></div>
+                                    <div class="form-group col-md-7  divM" ><input type="text" class="form-control" name="primer_apellido" value="<?php echo $this->mostrar($data3->primer_apellido); ?>"></div>
                                 </div>
                                 <hr>
                                 <div class="form-row">
                                     <div class="form-group col-md-4 divM">Segundo Apellido</div>
-                                    <div class="form-group col-md-7  divM" ><input type="text" class="form-control" name="segundo_apellido" value="<?php echo $data3->segundo_apellido; ?>"></div>
+                                    <div class="form-group col-md-7  divM" ><input type="text" class="form-control" name="segundo_apellido" value="<?php echo $this->mostrar($data3->segundo_apellido); ?>"></div>
                                 </div>
                                 <hr>
                                 <div class="form-row">
                                     <div class="form-group col-md-4  divM">Email</div>
-                                    <div class="form-group col-md-7  divM" ><input type="text" class="form-control" name="email" value="<?php echo $data3->email; ?>"></div>
+                                    <div class="form-group col-md-7  divM" ><input type="text" class="form-control" name="email" value="<?php echo $this->mostrar($data3->email); ?>"></div>
                                 </div>
                                 <hr>
                                 <div class="form-row">
                                     <div class="form-group col-md-4 divM">Telefono</div>
-                                    <div class="form-group col-md-7 divM" ><input type="number" class="form-control" name="telefono" value="<?php echo $data3->telefono; ?>"></div>
+                                    <div class="form-group col-md-7 divM" ><input type="number" class="form-control" name="telefono" value="<?php echo $this->mostrar($data3->telefono); ?>"></div>
                                 </div>
                                 <hr>
                                 <div class="form-row">
                                     <div class="form-group col-md-4 divM">Dirección</div>
-                                    <div class="form-group col-md-7 divM" ><input type="text" class="form-control" name="direccion" value="<?php echo $data3->direccion; ?>"></div>
+                                    <div class="form-group col-md-7 divM" ><input type="text" class="form-control" name="direccion" value="<?php echo $this->mostrar($data3->direccion); ?>"></div>
                                 </div>
                                 <hr>
                                 <div class="form-row">
                                     <div class="form-group col-md-4  divM">Codigo Ficha</div>
-                                    <div class="form-group col-md-7  divM" ><?php echo $data3->fk_id_ficha; ?></div>
+                                    <div class="form-group col-md-7  divM" ><?php echo $this->mostrar($data3->fk_id_ficha); ?></div>
                                 </div>
                             </div>
                         <div class="modal-footer justify-content-center">

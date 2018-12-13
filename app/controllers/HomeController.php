@@ -31,7 +31,7 @@ class HomeController extends Controller
                     'telefono'=> $this->cleanData($_POST["telefono"]),
                     'direccion'=> $this->cleanData($_POST["direccion"]),
                     'email'=> $this->cleanData($_POST["email"]), 
-                    'password'=> $this->cleanData($_POST["password"])
+                    'password'=> md5($_POST["password"])
                 );
                 $data2 =  $this->loginModel->registrar($info_usuario);
                 $this->view('home/registro',$this->data,$data2);
@@ -57,7 +57,7 @@ class HomeController extends Controller
         if (isset($_POST['dni'],$_POST['password'])) {
             
             $documento = $this->cleanData($_POST['dni']);
-            $password = $this->cleanData($_POST['password']);
+            $password = md5($_POST['password']);
             
             $user = $this->loginModel->show($documento);
             if (!empty($user)) {

@@ -4,7 +4,7 @@ class ApoyoController extends Controller
 {
     private $apoyoModel;
     function __construct(){
-        Security::auth('Apoyo');
+        Security::auth('2');
         $this->apoyoModel = $this->model("apoyo");
     }
     public function index(){

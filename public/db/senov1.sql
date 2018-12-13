@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1:3306
--- Tiempo de generación: 07-12-2018 a las 22:31:00
+-- Tiempo de generación: 13-12-2018 a las 19:36:21
 -- Versión del servidor: 5.7.19
 -- Versión de PHP: 5.6.31
 
@@ -63,7 +63,7 @@ CREATE TABLE IF NOT EXISTS `competencias` (
 --
 
 INSERT INTO `competencias` (`id_competencia`, `competencia`, `fk_id_programa`, `trimestre_diurno`, `trimestre_especial`, `estado`) VALUES
-(1, 'Produce Textos en ingles', 1, '1', '1', '1');
+(1, 'PRODUCE TEXTOS EN INGLES', 1, '1', '1', '1');
 
 -- --------------------------------------------------------
 
@@ -74,7 +74,7 @@ INSERT INTO `competencias` (`id_competencia`, `competencia`, `fk_id_programa`, `
 DROP TABLE IF EXISTS `estado_novedad`;
 CREATE TABLE IF NOT EXISTS `estado_novedad` (
   `id_estado` int(11) NOT NULL AUTO_INCREMENT,
-  `estado` varchar(20) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
+  `estado_novedad` varchar(20) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
   PRIMARY KEY (`id_estado`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
@@ -82,10 +82,10 @@ CREATE TABLE IF NOT EXISTS `estado_novedad` (
 -- Volcado de datos para la tabla `estado_novedad`
 --
 
-INSERT INTO `estado_novedad` (`id_estado`, `estado`) VALUES
-(1, 'En tramite'),
-(2, 'Aprobado'),
-(3, 'No Aprobado');
+INSERT INTO `estado_novedad` (`id_estado`, `estado_novedad`) VALUES
+(1, 'EN TRAMITE'),
+(2, 'APROBADO'),
+(3, 'NO APROBADO');
 
 -- --------------------------------------------------------
 
@@ -100,23 +100,21 @@ CREATE TABLE IF NOT EXISTS `fichas` (
   `fk_id_jornada` int(11) NOT NULL,
   `fk_id_modalidad` int(11) NOT NULL,
   `fk_id_programa_formacion` int(11) NOT NULL,
-  `fk_id_proyecto` int(11) NOT NULL,
   `trimestre_formacion` int(11) NOT NULL,
   `estado` char(1) NOT NULL DEFAULT '1',
   PRIMARY KEY (`id_ficha`),
   KEY `fk_id_sede` (`fk_id_sede`,`fk_id_jornada`,`fk_id_modalidad`,`fk_id_programa_formacion`),
   KEY `fk_id_modalidad` (`fk_id_modalidad`),
   KEY `fk_id_programa_formacion` (`fk_id_programa_formacion`),
-  KEY `fk_id_jornada` (`fk_id_jornada`),
-  KEY `fk_id_proyecto` (`fk_id_proyecto`)
+  KEY `fk_id_jornada` (`fk_id_jornada`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Volcado de datos para la tabla `fichas`
 --
 
-INSERT INTO `fichas` (`id_ficha`, `fk_id_sede`, `fk_id_jornada`, `fk_id_modalidad`, `fk_id_programa_formacion`, `fk_id_proyecto`, `trimestre_formacion`, `estado`) VALUES
-('1438303', 3, 3, 1, 1, 4, 5, '1');
+INSERT INTO `fichas` (`id_ficha`, `fk_id_sede`, `fk_id_jornada`, `fk_id_modalidad`, `fk_id_programa_formacion`, `trimestre_formacion`, `estado`) VALUES
+('1438303', 3, 3, 1, 1, 5, '1');
 
 -- --------------------------------------------------------
 
@@ -138,10 +136,7 @@ CREATE TABLE IF NOT EXISTS `habilitado` (
 --
 
 INSERT INTO `habilitado` (`fk_id_tipo_documento`, `documento`, `estado`) VALUES
-(1, '123', '1'),
-(1, '325', '1'),
-(1, '456', '1'),
-(1, '777', '1');
+(1, '123', '1');
 
 -- --------------------------------------------------------
 
@@ -154,7 +149,8 @@ CREATE TABLE IF NOT EXISTS `jornada` (
   `id_jornada` int(11) NOT NULL AUTO_INCREMENT,
   `jornada` varchar(50) NOT NULL,
   `estado` char(1) NOT NULL DEFAULT '1',
-  PRIMARY KEY (`id_jornada`)
+  PRIMARY KEY (`id_jornada`),
+  UNIQUE KEY `jornada` (`jornada`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 --
@@ -162,9 +158,9 @@ CREATE TABLE IF NOT EXISTS `jornada` (
 --
 
 INSERT INTO `jornada` (`id_jornada`, `jornada`, `estado`) VALUES
-(1, 'Diurna', '1'),
-(2, 'Nocturna', '1'),
-(3, 'Fines de Semana', '1');
+(1, 'DIURNA', '1'),
+(2, 'NOCTURNA', '1'),
+(3, 'FINES DE SEMANA', '1');
 
 -- --------------------------------------------------------
 
@@ -177,7 +173,8 @@ CREATE TABLE IF NOT EXISTS `modalidad` (
   `id_modalidad` int(11) NOT NULL AUTO_INCREMENT,
   `modalidad` varchar(50) NOT NULL,
   `estado` char(1) NOT NULL DEFAULT '1',
-  PRIMARY KEY (`id_modalidad`)
+  PRIMARY KEY (`id_modalidad`),
+  UNIQUE KEY `modalidad` (`modalidad`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 --
@@ -185,8 +182,8 @@ CREATE TABLE IF NOT EXISTS `modalidad` (
 --
 
 INSERT INTO `modalidad` (`id_modalidad`, `modalidad`, `estado`) VALUES
-(1, 'Presencial', '1'),
-(2, 'Virtual', '1');
+(1, 'PRESENCIAL', '1'),
+(2, 'VIRTUAL', '1');
 
 -- --------------------------------------------------------
 
@@ -199,24 +196,24 @@ CREATE TABLE IF NOT EXISTS `novedades` (
   `fk_id_tipo_documento` int(11) NOT NULL,
   `id_novedad` int(11) NOT NULL AUTO_INCREMENT,
   `documento` varchar(15) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
-  `fk_id_ficha` varchar(30) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
   `fk_id_tipo_novedad` int(11) NOT NULL,
-  `acta_novedad` varchar(250) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
   `motivo` text CHARACTER SET utf8 COLLATE utf8_spanish_ci,
   `comentarios` text CHARACTER SET utf8 COLLATE utf8_spanish_ci,
   `recomendaciones` text CHARACTER SET utf8 COLLATE utf8_spanish_ci,
   `evidencias` text CHARACTER SET utf8 COLLATE utf8_spanish_ci,
   `nueva_jornada` text CHARACTER SET utf8 COLLATE utf8_spanish_ci,
   `nueva_ficha` text CHARACTER SET utf8 COLLATE utf8_spanish_ci,
+  `observaciones` text CHARACTER SET utf8 COLLATE utf8_spanish_ci,
   `fecha_inicio` date NOT NULL,
-  `fecha_final` date NOT NULL,
+  `fecha_final` date DEFAULT NULL,
   `fk_id_estado` int(11) NOT NULL,
   `estado` char(1) NOT NULL DEFAULT '1',
   PRIMARY KEY (`id_novedad`),
   KEY `fk_id_tipo_documento` (`fk_id_tipo_documento`),
-  KEY `fk_id_ficha` (`fk_id_ficha`,`fk_id_tipo_novedad`,`fk_id_estado`),
+  KEY `fk_id_ficha` (`fk_id_tipo_novedad`,`fk_id_estado`),
   KEY `fk_id_estado` (`fk_id_estado`),
-  KEY `fk_id_tipo_novedad` (`fk_id_tipo_novedad`)
+  KEY `fk_id_tipo_novedad` (`fk_id_tipo_novedad`),
+  KEY `documento` (`documento`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -233,19 +230,15 @@ CREATE TABLE IF NOT EXISTS `permiso_cargo` (
   PRIMARY KEY (`id_permiso`),
   KEY `fk_documento` (`fk_id_cargo`),
   KEY `fk_documento_2` (`fk_documento`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 --
 -- Volcado de datos para la tabla `permiso_cargo`
 --
 
 INSERT INTO `permiso_cargo` (`id_permiso`, `fk_id_cargo`, `fk_documento`) VALUES
-(1, 3, '123'),
-(2, 1, '123'),
-(3, 3, '456'),
-(4, 1, '456'),
-(5, 3, '325'),
-(6, 3, '777');
+(2, 3, '123'),
+(3, 1, '123');
 
 -- --------------------------------------------------------
 
@@ -260,6 +253,7 @@ CREATE TABLE IF NOT EXISTS `programa_formacion` (
   `fk_id_tipo_formacion` int(11) NOT NULL,
   `estado` char(1) NOT NULL DEFAULT '1',
   PRIMARY KEY (`id_programa_formacion`),
+  UNIQUE KEY `programa_formacion` (`programa_formacion`),
   KEY `fk_id_tipo_formacion` (`fk_id_tipo_formacion`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
@@ -268,55 +262,8 @@ CREATE TABLE IF NOT EXISTS `programa_formacion` (
 --
 
 INSERT INTO `programa_formacion` (`id_programa_formacion`, `programa_formacion`, `fk_id_tipo_formacion`, `estado`) VALUES
-(1, 'Análisis y Desarrollo de Sistemas de Información', 1, '1'),
-(2, 'Programación de Software', 2, '1');
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `proyecto`
---
-
-DROP TABLE IF EXISTS `proyecto`;
-CREATE TABLE IF NOT EXISTS `proyecto` (
-  `id_proyecto` int(11) NOT NULL AUTO_INCREMENT,
-  `fase_proyecto` varchar(255) NOT NULL,
-  `estado` char(1) NOT NULL DEFAULT '1',
-  PRIMARY KEY (`id_proyecto`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
-
---
--- Volcado de datos para la tabla `proyecto`
---
-
-INSERT INTO `proyecto` (`id_proyecto`, `fase_proyecto`, `estado`) VALUES
-(1, 'Análisis', '1'),
-(2, 'Planeación', '1'),
-(3, 'Ejecución', '1'),
-(4, 'Evaluación', '1');
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `resultados_aprendizaje`
---
-
-DROP TABLE IF EXISTS `resultados_aprendizaje`;
-CREATE TABLE IF NOT EXISTS `resultados_aprendizaje` (
-  `id_resultado_aprendizaje` int(11) NOT NULL AUTO_INCREMENT,
-  `resultado_aprendizaje` mediumtext NOT NULL,
-  `fk_id_competencia` int(11) NOT NULL,
-  `estado` char(1) NOT NULL DEFAULT '1',
-  PRIMARY KEY (`id_resultado_aprendizaje`),
-  KEY `fk_id_competencia` (`fk_id_competencia`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
-
---
--- Volcado de datos para la tabla `resultados_aprendizaje`
---
-
-INSERT INTO `resultados_aprendizaje` (`id_resultado_aprendizaje`, `resultado_aprendizaje`, `fk_id_competencia`, `estado`) VALUES
-(1, 'Aprender ingles vato v:', 1, '1');
+(1, 'ANÁLISIS Y DESARROLLO DE SISTEMAS DE INFORMACIÓN', 1, '1'),
+(2, 'PROGRAMACIÓN DE SOFTWARE', 2, '1');
 
 -- --------------------------------------------------------
 
@@ -329,7 +276,8 @@ CREATE TABLE IF NOT EXISTS `sede` (
   `id_sede` int(5) NOT NULL AUTO_INCREMENT,
   `sede` varchar(255) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
   `estado` char(1) NOT NULL DEFAULT '1',
-  PRIMARY KEY (`id_sede`)
+  PRIMARY KEY (`id_sede`),
+  UNIQUE KEY `sede` (`sede`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 
 --
@@ -337,40 +285,11 @@ CREATE TABLE IF NOT EXISTS `sede` (
 --
 
 INSERT INTO `sede` (`id_sede`, `sede`, `estado`) VALUES
-(1, 'Colombia', '1'),
-(2, 'Ricaurte', '1'),
-(3, 'Complejo Sur', '1'),
-(4, 'Álamos', '1'),
-(5, 'Restrepo', '1');
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `tipo_acta`
---
-
-DROP TABLE IF EXISTS `tipo_acta`;
-CREATE TABLE IF NOT EXISTS `tipo_acta` (
-  `id_formato` int(11) NOT NULL AUTO_INCREMENT,
-  `formato` varchar(100) NOT NULL,
-  `estado` char(1) NOT NULL DEFAULT '1',
-  PRIMARY KEY (`id_formato`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
-
---
--- Volcado de datos para la tabla `tipo_acta`
---
-
-INSERT INTO `tipo_acta` (`id_formato`, `formato`, `estado`) VALUES
-(1, 'ACTA ACADÉMICO APLAZAMIENTO 2018.docx', '1'),
-(2, 'ACTA CAMBIO DE JORNADA.docx', '1'),
-(3, 'ACTA DESERCION.docx', '1'),
-(4, 'ACTA DE REINTEGRO 2018.docx', '1'),
-(5, 'CONDICIONAMIENTO MATRICULA.docx', '1'),
-(6, 'ACTA ACADÉMICO RETIRO VOLUNTARIO 2018.docx', '1'),
-(7, 'ACTO ACADÉMICO CANCELACIÓN DE MATRICULA POR DESERCIÓN.docx', '1'),
-(8, 'ACTA TRASLADO.docx', '1'),
-(9, 'ACTA CAMBIO DE SEDE.docx', '1');
+(1, 'COLOMBIA', '1'),
+(2, 'RICAURTE', '1'),
+(3, 'COMPLEJO SUR', '1'),
+(4, 'ÁLAMOS', '1'),
+(5, 'RESTREPO', '1');
 
 -- --------------------------------------------------------
 
@@ -383,7 +302,8 @@ CREATE TABLE IF NOT EXISTS `tipo_cargo` (
   `id_cargo` int(5) NOT NULL AUTO_INCREMENT,
   `cargo` varchar(50) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
   `estado` char(1) NOT NULL DEFAULT '1',
-  PRIMARY KEY (`id_cargo`)
+  PRIMARY KEY (`id_cargo`),
+  UNIQUE KEY `cargo` (`cargo`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 
 --
@@ -391,11 +311,11 @@ CREATE TABLE IF NOT EXISTS `tipo_cargo` (
 --
 
 INSERT INTO `tipo_cargo` (`id_cargo`, `cargo`, `estado`) VALUES
-(1, 'Administrador', '1'),
-(2, 'Apoyo Administrativo', '1'),
-(3, 'Usuario', '1'),
-(4, 'Instructor', '1'),
-(5, 'Aprendiz', '1');
+(1, 'ADMINISTRADOR', '1'),
+(2, 'APOYO ADMINISTRATIVO', '1'),
+(3, 'INVITADO', '1'),
+(4, 'INSTRUCTOR', '1'),
+(5, 'APRENDIZ', '1');
 
 -- --------------------------------------------------------
 
@@ -408,7 +328,8 @@ CREATE TABLE IF NOT EXISTS `tipo_documento` (
   `id_tipo_documento` int(11) NOT NULL AUTO_INCREMENT,
   `tipo_documento` varchar(50) NOT NULL,
   `estado` char(1) NOT NULL DEFAULT '1',
-  PRIMARY KEY (`id_tipo_documento`)
+  PRIMARY KEY (`id_tipo_documento`),
+  UNIQUE KEY `tipo_documento` (`tipo_documento`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 
 --
@@ -416,11 +337,11 @@ CREATE TABLE IF NOT EXISTS `tipo_documento` (
 --
 
 INSERT INTO `tipo_documento` (`id_tipo_documento`, `tipo_documento`, `estado`) VALUES
-(1, 'Cédula de Ciudadanía', '1'),
-(2, 'Tarjeta de Identidad', '1'),
-(3, 'Cédula de Extranjería', '1'),
-(4, 'Pasaporte', '1'),
-(5, 'Número ciego SENA', '1');
+(1, 'CÉDULA DE CIUDADANÍA', '1'),
+(2, 'TARJETA DE IDENTIDAD', '1'),
+(3, 'CÉDULA DE EXTRANJERÍA', '1'),
+(4, 'PASAPORTE', '1'),
+(5, 'NÚMERO CIEGO SENA', '1');
 
 -- --------------------------------------------------------
 
@@ -433,7 +354,8 @@ CREATE TABLE IF NOT EXISTS `tipo_formacion` (
   `id_tipo_formacion` int(11) NOT NULL AUTO_INCREMENT,
   `tipo_formacion` varchar(50) NOT NULL,
   `estado` char(1) NOT NULL DEFAULT '1',
-  PRIMARY KEY (`id_tipo_formacion`)
+  PRIMARY KEY (`id_tipo_formacion`),
+  UNIQUE KEY `tipo_formacion` (`tipo_formacion`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 
 --
@@ -441,11 +363,11 @@ CREATE TABLE IF NOT EXISTS `tipo_formacion` (
 --
 
 INSERT INTO `tipo_formacion` (`id_tipo_formacion`, `tipo_formacion`, `estado`) VALUES
-(1, 'Tecnólogo', '1'),
-(2, 'Técnico', '1'),
-(3, 'Especialización', '1'),
-(4, 'Complementaria', '1'),
-(5, 'Curso Corto', '1');
+(1, 'TECNÓLOGO', '1'),
+(2, 'TÉCNICO', '1'),
+(3, 'ESPECIALIZACIÓN', '1'),
+(4, 'COMPLEMENTARIA', '1'),
+(5, 'CURSO CORTO', '1');
 
 -- --------------------------------------------------------
 
@@ -457,26 +379,22 @@ DROP TABLE IF EXISTS `tipo_novedad`;
 CREATE TABLE IF NOT EXISTS `tipo_novedad` (
   `id_novedad` int(11) NOT NULL AUTO_INCREMENT,
   `novedad` varchar(80) NOT NULL,
-  `fk_id_tipo_acta` int(11) NOT NULL,
   `estado` char(1) NOT NULL DEFAULT '1',
   PRIMARY KEY (`id_novedad`),
-  KEY `fk_id_tipo_acta` (`fk_id_tipo_acta`)
+  UNIQUE KEY `novedad` (`novedad`)
 ) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
 
 --
 -- Volcado de datos para la tabla `tipo_novedad`
 --
 
-INSERT INTO `tipo_novedad` (`id_novedad`, `novedad`, `fk_id_tipo_acta`, `estado`) VALUES
-(1, 'Aplazamiento', 1, '1'),
-(2, 'Cambio de jornada', 2, '1'),
-(3, 'Deserción', 3, '1'),
-(4, 'Reintegro', 4, '1'),
-(5, 'Condicionamiento de matricula', 5, '1'),
-(6, 'Retiro voluntario', 6, '1'),
-(7, 'Cancelación de matricula', 7, '1'),
-(8, 'Traslado', 8, '1'),
-(9, 'Cambio de sede', 9, '1');
+INSERT INTO `tipo_novedad` (`id_novedad`, `novedad`, `estado`) VALUES
+(1, 'APLAZAMIENTO', '1'),
+(2, 'CAMBIO DE JORNADA', '1'),
+(3, 'DESERCIÓN', '1'),
+(4, 'REINTEGRO', '1'),
+(5, 'TRASLADO', '1'),
+(6, 'RETIRO VOLUNTARIO', '1');
 
 -- --------------------------------------------------------
 
@@ -493,6 +411,7 @@ CREATE TABLE IF NOT EXISTS `usuarios_admin` (
   `segundo_apellido` varchar(30) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
   `email` varchar(50) NOT NULL,
   `telefono` varchar(20) NOT NULL,
+  `direccion` varchar(30) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
   `fk_id_ficha` varchar(30) CHARACTER SET utf8 COLLATE utf8_spanish_ci DEFAULT NULL,
   `password` varchar(250) CHARACTER SET utf8 COLLATE utf8_spanish_ci DEFAULT NULL,
   `intentos` int(11) DEFAULT NULL,
@@ -507,11 +426,8 @@ CREATE TABLE IF NOT EXISTS `usuarios_admin` (
 -- Volcado de datos para la tabla `usuarios_admin`
 --
 
-INSERT INTO `usuarios_admin` (`fk_id_tipo_documento`, `documento`, `nombre`, `primer_apellido`, `segundo_apellido`, `email`, `telefono`, `fk_id_ficha`, `password`, `intentos`, `estado`) VALUES
-(1, '123', 'Juan David', 'Gomez', 'Benavides', 'jdgomez@example.com', '12354645', NULL, '123', 0, '1'),
-(1, '325', 'SANTIAGO', 'TORRES', 'PANTOJA', 'stoore@example.co', '6516', NULL, '123', 0, '1'),
-(1, '456', 'PHILIPH', 'COUHTINHO', 'DA SILVA', 'XDXDXD@VVV.CO', '123646', NULL, '123', 0, '1'),
-(1, '777', 'Kevin Julian', 'Galindo', 'Meneses', 'asdada@asdasd.co', '321656', NULL, '123', 0, '1');
+INSERT INTO `usuarios_admin` (`fk_id_tipo_documento`, `documento`, `nombre`, `primer_apellido`, `segundo_apellido`, `email`, `telefono`, `direccion`, `fk_id_ficha`, `password`, `intentos`, `estado`) VALUES
+(1, '123', 'JUAN DAVID', 'GOMEZ', 'BENAVIDES', 'JDGOMEZ@EXAMPLE.COM', '16516', 'CLL 23F', NULL, '202cb962ac59075b964b07152d234b70', 0, '1');
 
 --
 -- Restricciones para tablas volcadas
@@ -536,8 +452,7 @@ ALTER TABLE `fichas`
   ADD CONSTRAINT `fichas_ibfk_1` FOREIGN KEY (`fk_id_modalidad`) REFERENCES `modalidad` (`id_modalidad`),
   ADD CONSTRAINT `fichas_ibfk_2` FOREIGN KEY (`fk_id_programa_formacion`) REFERENCES `programa_formacion` (`id_programa_formacion`),
   ADD CONSTRAINT `fichas_ibfk_3` FOREIGN KEY (`fk_id_jornada`) REFERENCES `jornada` (`id_jornada`),
-  ADD CONSTRAINT `fichas_ibfk_4` FOREIGN KEY (`fk_id_sede`) REFERENCES `sede` (`id_sede`),
-  ADD CONSTRAINT `fichas_ibfk_5` FOREIGN KEY (`fk_id_proyecto`) REFERENCES `proyecto` (`id_proyecto`);
+  ADD CONSTRAINT `fichas_ibfk_4` FOREIGN KEY (`fk_id_sede`) REFERENCES `sede` (`id_sede`);
 
 --
 -- Filtros para la tabla `habilitado`
@@ -552,7 +467,7 @@ ALTER TABLE `novedades`
   ADD CONSTRAINT `novedades_ibfk_1` FOREIGN KEY (`fk_id_estado`) REFERENCES `estado_novedad` (`id_estado`),
   ADD CONSTRAINT `novedades_ibfk_3` FOREIGN KEY (`fk_id_tipo_novedad`) REFERENCES `tipo_novedad` (`id_novedad`),
   ADD CONSTRAINT `novedades_ibfk_5` FOREIGN KEY (`fk_id_tipo_documento`) REFERENCES `tipo_documento` (`id_tipo_documento`),
-  ADD CONSTRAINT `novedades_ibfk_6` FOREIGN KEY (`fk_id_ficha`) REFERENCES `fichas` (`id_ficha`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `novedades_ibfk_6` FOREIGN KEY (`documento`) REFERENCES `usuarios_admin` (`documento`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `permiso_cargo`
@@ -566,18 +481,6 @@ ALTER TABLE `permiso_cargo`
 --
 ALTER TABLE `programa_formacion`
   ADD CONSTRAINT `programa_formacion_ibfk_1` FOREIGN KEY (`fk_id_tipo_formacion`) REFERENCES `tipo_formacion` (`id_tipo_formacion`);
-
---
--- Filtros para la tabla `resultados_aprendizaje`
---
-ALTER TABLE `resultados_aprendizaje`
-  ADD CONSTRAINT `resultados_aprendizaje_ibfk_1` FOREIGN KEY (`fk_id_competencia`) REFERENCES `competencias` (`id_competencia`);
-
---
--- Filtros para la tabla `tipo_novedad`
---
-ALTER TABLE `tipo_novedad`
-  ADD CONSTRAINT `tipo_novedad_ibfk_1` FOREIGN KEY (`fk_id_tipo_acta`) REFERENCES `tipo_acta` (`id_formato`);
 
 --
 -- Filtros para la tabla `usuarios_admin`

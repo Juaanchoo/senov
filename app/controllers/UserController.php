@@ -7,7 +7,7 @@ class UserController extends Controller
 	private $rol;
 
 	function __construct(){
-		Security::auth('Usuario');
+		Security::auth('3');
 		$this->userModel = $this->model('user'); 
 		$this->rolModel = $this->model('rol'); 
 		$this->rol = $this->rolModel->get_Roles($_SESSION["documento"]);

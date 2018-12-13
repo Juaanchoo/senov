@@ -4,11 +4,11 @@
 		<h5 class="card-header t-card">Novedades</h5>
 		<div class="card-body">
 		<div class="row">
-                <div class="col-md-6">
+                <!-- <div class="col-md-6">
                     <a href="" data-toggle="modal" data-target="#ModalDeser" class="btn btn-outline-dark">Registrar Deserción &nbsp;<i class="fas fa-plus"></i></a>
-                </div>
+                </div> -->
                 
-                <div class="col-md-6">
+                <div class="">
                     <div class="search-form">
                         <span>Buscar:</span>
                         <input type="text" placeholder="Buscar...">
@@ -31,15 +31,15 @@
 						<?php
 						//var_dump($data2);
 							foreach ($data2 as $d) {
-								echo "<tr>
-									<td>	$d->id_novedad</td>
-									<td>	$d->documento</td>
-									<td>	$d->nombre</td>
-									<td>	$d->primer_apellido</td>
-									<td>	$d->fk_id_ficha</td>
-									<td>	$d->novedad</td>
-									<td> <a href='".URL_APP."/admin/estado_Novedad/$d->id_novedad'>Ver mas</a></td>
-								</tr>";
+								echo '<tr>
+									<td>	'.$this->mostrar($d->id_novedad).'</td>
+									<td>	'.$this->mostrar($d->documento).'</td>
+									<td>	'.$this->mostrar($d->nombre).'</td>
+									<td>	'.$this->mostrar($d->primer_apellido).'</td>
+									<td>	'.$this->mostrar($d->fk_id_ficha).'</td>
+									<td>	'.$this->mostrar($d->novedad).'</td>
+									<td> <a href="'.URL_APP.'/admin/estado_Novedad/'.$d->id_novedad.'">Ver mas</a></td>
+								</tr>';
 							}
 						?>
 				</tbody>
@@ -78,7 +78,7 @@
 							<hr>
 							<div class="row">
 								<div class="col divM">Tipo Documento</div>
-									<div class="col divM" ><?php echo $data3->tipo_documento; ?></div>
+									<div class="col divM" ><?php echo $this->mostrar($data3->tipo_documento); ?></div>
 							</div> 
 							<hr>
 							<div class="row">
@@ -88,32 +88,32 @@
 							<hr>
 							<div class="row">
 								<div class="col divM">Nombre</div>
-								<div class="col divM" ><?php echo $data3->nombre; ?></div>
+								<div class="col divM" ><?php echo $this->mostrar($data3->nombre); ?></div>
 							</div>
 							<hr>
 							<div class="row">
 								<div class="col divM">Apellido</div>
-								<div class="col divM" ><?php echo $data3->primer_apellido." ".$data3->segundo_apellido; ?></div>
+								<div class="col divM" ><?php echo $this->mostrar($data3->primer_apellido)." ".$this->mostrar($data3->segundo_apellido); ?></div>
 							</div>
 							<hr>
 							<div class="row">
 								<div class="col divM">Email</div>
-								<div class="col divM" ><?php echo $data3->email; ?></div>
+								<div class="col divM" ><?php echo $this->mostrar($data3->email); ?></div>
 							</div>
 							<hr>
 							<div class="row">
 								<div class="col divM">Telefono</div>
-								<div class="col divM" ><?php echo $data3->telefono; ?></div>
+								<div class="col divM" ><?php echo $this->mostrar($data3->telefono); ?></div>
 							</div>
 							<hr>
 							<div class="row">
 								<div class="col divM">Codigo Ficha</div>
-								<div class="col divM" ><?php echo $data3->fk_id_ficha; ?></div>
+								<div class="col divM" ><?php echo $this->mostrar($data3->fk_id_ficha); ?></div>
 							</div>
 							<hr>
 							<div class="row">
 								<div class="col divM">Novedad</div>
-								<div class="col divM" ><?php echo $data3->novedad; ?></div>
+								<div class="col divM" ><?php echo $this->mostrar($data3->novedad); ?></div>
 							</div>
 							<hr>
 							<div class="row">
@@ -155,12 +155,12 @@
 							<div class="row">
 								<div class="col divM">Estado Novedad</div>
 								<div class="col divM">
-									<?php if ($data3->estado_novedad == "En tramite") {
+									<?php if ($this->mostrar($data3->estado_novedad) == "En Tramite") {
 										echo '<span  class="badge badge-info" >En tramite</span>';
 									}
 									?>
-									<?php if ($data3->estado_novedad == "Aprobado") { echo '<span class="badge badge-success" >Aprobado</span>';}?>
-									<?php if ($data3->estado_novedad == "No Aprobado") { echo '<span  class="badge badge-danger" >No Aprobado</span>';}?>
+									<?php if ($this->mostrar($data3->estado_novedad) == "Aprobado") { echo '<span class="badge badge-success" >Aprobado</span>';}?>
+									<?php if ($this->mostrar($data3->estado_novedad) == "No Aprobado") { echo '<span  class="badge badge-danger" >No Aprobado</span>';}?>
 								<div class="btn-group dropright">
 									<button type="button" class="btn btn-secondary " data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 										<i class="fas fa-cog"></i>

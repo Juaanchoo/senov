@@ -121,7 +121,7 @@ class UsuariosModel extends DataBase
             if(!empty($get)){
                 return $get;
             }else{
-                return "No hay registros para mostra";
+                return false;
             }
         } catch (Exception $e) {
             return "Usuarios_get_Usuarios_DATA BASE ERROR";
