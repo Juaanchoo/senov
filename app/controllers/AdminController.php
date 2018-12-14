@@ -10,8 +10,14 @@ class AdminController extends Controller
     private $aprenModel;
     private $usuariosModel;
     private $programaModel;
-    private $tformacionModel;
+    private $tipoFormacionModel;
     private $habilitadoModel;
+    private $tipoDocumentoModel;
+    private $sedeModel;
+    private $modalidadModel;
+    private $jornadaModel;
+    private $estadosModel;
+    private $competenciaModel;
 
      /**
      * @author senov
@@ -27,9 +33,15 @@ class AdminController extends Controller
         $this->aprenModel = $this->model("Aprendiz");
         $this->tablasModel = $this->model("tablas");
         $this->programaModel = $this->model("Programa");
-        $this->tformacionModel = $this->model("Tipoformacion");
+        $this->tipoFormacionModel = $this->model("Tipoformacion");
         $this->habilitadoModel = $this->model("Habilitado");
         $this->rol = $this->rolModel->get_Roles($_SESSION["documento"]);
+        $this->tipoDocumentoModel = $this->model("tipoDocumento");
+        $this->sedeModel = $this->model("sede");
+        $this->modalidadModel = $this->model("modalidad");
+        $this->jornadaModel = $this->model("jornada");
+        $this->estadosModel = $this->model("estados");
+        $this->competenciaModel = $this->model("competencia");
     }
 
      /**
@@ -517,7 +529,7 @@ class AdminController extends Controller
     public function programaFormacion($id_programa = null, $respuesta = null)
     {
         $getProgramas = $this->programaModel->get_Programas();
-        $tfor = $this->tformacionModel->get_Tipos_Formacion();
+        $tfor = $this->tipoFormacionModel->get_Tipos_Formacion();
         $data2 = array(
             "programas_formacion" => $getProgramas,
             "tipos_formacion" => $tfor,
@@ -687,6 +699,217 @@ class AdminController extends Controller
         // var_dump($novedad  );
         $pdf= new PdfController;
         $pdf->desercion($novedad);
+    }
+
+    /**
+     * @author senov
+     * Vista crud tipo formacion
+     */
+    public function tipo_formacion()
+    {
+        if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+            $data = $this->tipoFormacionModel->get_Tipos_Formacion();
+            $this->view('admin/tipo_formacion',$data);
+        }else if($_SERVER['REQUEST_METHOD'] == 'POST'){
+
+            $res = $this->tipoFormacionModel->set_Tipo_Formacion($_POST['nombre']);
+            echo json_encode(['data' => $res]);
+        }else if($_SERVER['REQUEST_METHOD'] == 'DELETE'){
+            $res = $this->tipoFormacionModel->deshabilitar_Tipo_Formacion($_REQUEST['id'],$_REQUEST['estado']);
+            echo json_encode(['data' => $res]);
+        }else if($_SERVER['REQUEST_METHOD'] == 'PUT'){
+            $res = $this->tipoFormacionModel->update_Tipo_Formacion($_REQUEST);
+            echo json_encode(['data' => $res]);
+        }
+    }
+
+    public function ver_tipo_formacion()
+    {
+        $res = $this->tipoFormacionModel->get_One_Tipo_Formacion($_REQUEST['id']);
+        echo json_encode(['data' => $res]);
+    }
+    /**
+     * @author senov
+     * Vista crud tipo formacion
+     */
+    public function tipo_documento()
+    {
+        if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+            $data = $this->tipoDocumentoModel->get_Tipos_Documento();
+            $this->view('admin/tipo_documento',$data);
+        }else if($_SERVER['REQUEST_METHOD'] == 'POST'){
+
+            $res = $this->tipoDocumentoModel->set_Tipo_Documento($_POST['nombre']);
+            echo json_encode(['data' => $res]);
+
+        }else if($_SERVER['REQUEST_METHOD'] == 'DELETE'){
+            $res = $this->tipoDocumentoModel->deshabilitar_Tipo_Documento($_REQUEST['id'],$_REQUEST['estado']);
+            echo json_encode(['data' => $res]);
+        }else if($_SERVER['REQUEST_METHOD'] == 'PUT'){
+            $res = $this->tipoDocumentoModel->update_Tipo_Documento($_REQUEST);
+            echo json_encode(['data' => $res]);
+        }
+    }
+
+    public function ver_tipo_documento()
+    {
+        $res = $this->tipoDocumentoModel->get_One_Tipo_Documento($_REQUEST['id']);
+        echo json_encode(['data' => $res]);
+    }
+    
+    /**
+     * @author senov
+     * Cerrar la sesión y lleva al inicio
+     */
+    public function sede()
+    {
+        if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+            $data = $this->sedeModel->get_sedes();
+            $this->view('admin/sede',$data);
+        }else if($_SERVER['REQUEST_METHOD'] == 'POST'){
+
+            $res = $this->sedeModel->set_sede($_POST['nombre']);
+            echo json_encode(['data' => $res]);
+
+        }else if($_SERVER['REQUEST_METHOD'] == 'DELETE'){
+            $res = $this->sedeModel->deshabilitar_sede($_REQUEST['id'],$_REQUEST['estado']);
+            echo json_encode(['data' => $res]);
+        }else if($_SERVER['REQUEST_METHOD'] == 'PUT'){
+            $res = $this->sedeModel->update_sede($_REQUEST);
+            echo json_encode(['data' => $_REQUEST]);
+        }
+    }
+
+    public function ver_sede()
+    {
+        $res = $this->sedeModel->get_One_sede($_REQUEST['id']);
+        echo json_encode(['data' => $res]);
+    }
+
+        /**
+     * @author modalidad
+     * Cerrar la sesión y lleva al inicio
+     */
+    public function modalidad()
+    {
+        if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+            $data = $this->modalidadModel->get_modalidad();
+            $this->view('admin/modalidad',$data);
+        }else if($_SERVER['REQUEST_METHOD'] == 'POST'){
+
+            $res = $this->modalidadModel->set_modalidad($_POST['nombre']);
+            echo json_encode(['data' => $res]);
+
+        }else if($_SERVER['REQUEST_METHOD'] == 'DELETE'){
+            $res = $this->modalidadModel->deshabilitar_modalidad($_REQUEST['id'],$_REQUEST['estado']);
+            echo json_encode(['data' => $res]);
+        }else if($_SERVER['REQUEST_METHOD'] == 'PUT'){
+            $res = $this->modalidadModel->update_modalidad($_REQUEST);
+            echo json_encode(['data' => $_REQUEST]);
+        }
+    }
+
+    public function ver_modalidad()
+    {
+        $res = $this->modalidadModel->get_One_modalidad($_REQUEST['id']);
+        echo json_encode(['data' => $res]);
+    }
+
+            /**
+     * @author modalidad
+     * Cerrar la sesión y lleva al inicio
+     */
+    public function jornada()
+    {
+        if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+            $data = $this->jornadaModel->get_jornada();
+            $this->view('admin/jornada',$data);
+        }else if($_SERVER['REQUEST_METHOD'] == 'POST'){
+
+            $res = $this->jornadaModel->set_jornada($_POST['nombre']);
+            echo json_encode(['data' => $res]);
+
+        }else if($_SERVER['REQUEST_METHOD'] == 'DELETE'){
+            $res = $this->jornadaModel->deshabilitar_jornada($_REQUEST['id'],$_REQUEST['estado']);
+            echo json_encode(['data' => $res]);
+        }else if($_SERVER['REQUEST_METHOD'] == 'PUT'){
+            $res = $this->jornadaModel->update_jornada($_REQUEST);
+            echo json_encode(['data' => $_REQUEST]);
+        }
+    }
+
+    public function ver_jornada()
+    {
+        $res = $this->jornadaModel->get_One_jornada($_REQUEST['id']);
+        echo json_encode(['data' => $res]);
+    }
+
+                /**
+     * @author estados
+     * Cerrar la sesión y lleva al inicio
+     */
+    public function estados()
+    {
+        if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+            $data = $this->estadosModel->get_estados();
+            $this->view('admin/estados',$data);
+        }else if($_SERVER['REQUEST_METHOD'] == 'POST'){
+
+            $res = $this->estadosModel->set_estados($_POST['nombre']);
+            echo json_encode(['data' => $res]);
+
+        }else if($_SERVER['REQUEST_METHOD'] == 'DELETE'){
+
+            $res = $this->estadosModel->deshabilitar_estados($_REQUEST['id'],$_REQUEST['estado']);
+            echo json_encode(['data' => $res]);
+            
+        }else if($_SERVER['REQUEST_METHOD'] == 'PUT'){
+            $res = $this->estadosModel->update_estados($_REQUEST);
+            echo json_encode(['data' => $_REQUEST]);
+        }
+    }
+
+    public function ver_estados()
+    {
+        $res = $this->estadosModel->get_One_estados($_REQUEST['id']);
+        echo json_encode(['data' => $res]);
+    }
+
+                    /**
+     * @author competencias
+     * Cerrar la sesión y lleva al inicio
+     */
+    public function competencia()
+    {
+        if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+            $data = $this->competenciaModel->get_competencia();
+            $this->view('admin/competencia',$data);
+        }else if($_SERVER['REQUEST_METHOD'] == 'POST'){
+
+            $res = $this->competenciaModel->set_competencia($_POST);
+            echo json_encode(['data' => $res]);
+
+        }else if($_SERVER['REQUEST_METHOD'] == 'DELETE'){
+
+            $res = $this->competenciaModel->deshabilitar_competencia($_REQUEST['id'],$_REQUEST['estado']);
+            echo json_encode(['data' => $res]);
+            
+        }else if($_SERVER['REQUEST_METHOD'] == 'PUT'){
+            $res = $this->competenciaModel->update_competencia($_REQUEST);
+            echo json_encode(['data' => $_REQUEST]);
+        }
+    }
+
+    public function ver_competencia()
+    {
+        $res = $this->competenciaModel->get_One_competencia($_REQUEST['id']);
+        echo json_encode(['data' => $res]);
+    }
+
+    public function select_programa()
+    {
+       $res = $this->programaModel->get_Programas();
+       echo json_encode(['data' => $res]);
     }
 
     /**
