@@ -7,6 +7,7 @@
                 <div class="col-md-6">
                     <a href="" data-toggle="modal" data-target="#exampleModal" class="btn btn-outline-dark">Registrar Usuario &nbsp;<i class="fas fa-plus"></i></a>
                     <a href="" data-toggle="modal" data-target="#modalHab" class="btn btn-outline-primary">Habilitar Usuario &nbsp;<i class="fas fa-plus"></i></a>
+                    <a href="<?php echo URL_APP;?>/admin/roles" class="btn btn-outline-primary">Roles &nbsp;<i class="fas fa-user-check"></i></a>
                 </div>
                 
                 <div class="col-md-6">

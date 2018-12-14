@@ -9,6 +9,8 @@ class AdminController extends Controller
     private $tablasModel;
     private $aprenModel;
     private $usuariosModel;
+    private $programaModel;
+    private $tformacionModel;
 
      /**
      * @author senov
@@ -23,6 +25,8 @@ class AdminController extends Controller
         $this->loginModel = $this->model("login");
         $this->aprenModel = $this->model("Aprendiz");
         $this->tablasModel = $this->model("tablas");
+        $this->programaModel = $this->model("Programa");
+        $this->tformacionModel = $this->model("Tipoformacion");
         $this->rol = $this->rolModel->get_Roles($_SESSION["documento"]);
     }
 
@@ -387,6 +391,89 @@ class AdminController extends Controller
             $this->usuarios_admin(null, $res);
         }
     } 
+
+    /**
+     * @author senov
+     * Mostrar vista de opciones
+     */
+    public function roles($id = null, $respuesta = null)
+    {
+        $getRol = $this->rolModel->get_Roles_Usuarios();
+        $data2 = array("roles" => $getRol);
+        $this->view('admin/roles', $this->rol, $data2);
+    }
+
+    /**
+     * @author senov
+     * Mostrar vista de opciones
+     */
+    public function mostrarOpciones()
+    {
+        $data = array();
+        $this->view('admin/opciones', $this->rol);
+    }
+
+    /**
+     * @author senov
+     * Mostrar vista de gestion de programa de formacion
+     */
+    public function programaFormacion($id_programa = null, $respuesta = null)
+    {
+        $getProgramas = $this->programaModel->get_Programas();
+        $data2 = array(
+            "programas_formacion" => $getProgramas,
+            "respuesta" => $respuesta);
+        if($id_programa!=null){
+            $getOne = $this->programaModel->get_One_Programa($id_programa);
+            $tfor = $this->tformacionModel->get_Tipos_Formacion();
+            $data2 = array(
+                "programas_formacion" => $getProgramas,
+                "tipos_formacion" => $tfor,
+                "one_programa" => $getOne,
+                "respuesta" => $respuesta);
+            $this->view('admin/programa_formacion', $this->rol, $data2);
+            
+        }else{
+            $this->view('admin/programa_formacion', $this->rol, $data2);
+        }
+    }
+
+    /**
+     * @author senov
+     * Mostrar vista de opciones
+     */
+    public function updatePrograma()
+    {
+        if($_POST["id_programaU"] && $_POST["programa_formacionU"] && $_POST["tipo_formacionU"]){
+
+            $datos = array(
+                "id_programa_formacion" => $this->cleanData($_POST["id_programaU"]),
+                "programa_formacion" => $this->cleanData($_POST["programa_formacionU"]),
+                "tipo_formacion" => $this->cleanData($_POST["tipo_formacionU"])
+            );
+            $get = $this->programaModel->update_Programa($datos);
+            if($get!=false){
+                //var_dump($get);
+                $this->programaFormacion(null,$get);
+            }else{
+                $respuesta = "<script>swal({
+                    type: 'error',
+                    title: 'Opps..',
+                    text: 'Lo sentimos! No se pudo actualizar',
+                })</script>";
+                $this->programaFormacion(null, $respuesta);
+            }
+
+        }else{
+            $respuesta = "<script>swal({
+                type: 'error',
+                title: 'Opps..',
+                text: 'Por favor! Llene todos los datos para poder actualizar',
+            })</script>";
+            $this->programaFormacion(null, $respuesta);
+
+        }
+    }
 
     /**
      * @author senov

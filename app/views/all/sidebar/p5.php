@@ -17,7 +17,7 @@
 		
 		<div class="col-9">
 		 <button class="btn" style="color: white; float: right; margin-top: 13px; background-color: #000 !important;">
-			 INVITADO: <?php echo $_SESSION["nombre"].' '. $_SESSION["documento"];?>
+			 INVITADO: <?php echo $this->mostrar($_SESSION["nombre"]).' '. $_SESSION["documento"];?>
 		 </button>
 		</div>
 		

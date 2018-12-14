@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1:3306
--- Tiempo de generación: 13-12-2018 a las 19:36:21
+-- Tiempo de generación: 13-12-2018 a las 22:17:12
 -- Versión del servidor: 5.7.19
 -- Versión de PHP: 5.6.31
 
@@ -136,7 +136,9 @@ CREATE TABLE IF NOT EXISTS `habilitado` (
 --
 
 INSERT INTO `habilitado` (`fk_id_tipo_documento`, `documento`, `estado`) VALUES
-(1, '123', '1');
+(1, '1000', '1'),
+(1, '123', '1'),
+(1, '321', '1');
 
 -- --------------------------------------------------------
 
@@ -214,7 +216,14 @@ CREATE TABLE IF NOT EXISTS `novedades` (
   KEY `fk_id_estado` (`fk_id_estado`),
   KEY `fk_id_tipo_novedad` (`fk_id_tipo_novedad`),
   KEY `documento` (`documento`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `novedades`
+--
+
+INSERT INTO `novedades` (`fk_id_tipo_documento`, `id_novedad`, `documento`, `fk_id_tipo_novedad`, `motivo`, `comentarios`, `recomendaciones`, `evidencias`, `nueva_jornada`, `nueva_ficha`, `observaciones`, `fecha_inicio`, `fecha_final`, `fk_id_estado`, `estado`) VALUES
+(1, 1, '1000', 1, 'SE VA A HACER UNA CIRUGíA', 'SE ACEPTA EL MOTIVO', 'POR FAVOR ACEPTAR NOVEDAD', 'PRUEBAS MEDICAS', NULL, NULL, NULL, '2018-12-13', NULL, 1, '1');
 
 -- --------------------------------------------------------
 
@@ -230,7 +239,7 @@ CREATE TABLE IF NOT EXISTS `permiso_cargo` (
   PRIMARY KEY (`id_permiso`),
   KEY `fk_documento` (`fk_id_cargo`),
   KEY `fk_documento_2` (`fk_documento`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 
 --
 -- Volcado de datos para la tabla `permiso_cargo`
@@ -238,7 +247,9 @@ CREATE TABLE IF NOT EXISTS `permiso_cargo` (
 
 INSERT INTO `permiso_cargo` (`id_permiso`, `fk_id_cargo`, `fk_documento`) VALUES
 (2, 3, '123'),
-(3, 1, '123');
+(3, 1, '123'),
+(4, 3, '321'),
+(5, 5, '1000');
 
 -- --------------------------------------------------------
 
@@ -427,7 +438,9 @@ CREATE TABLE IF NOT EXISTS `usuarios_admin` (
 --
 
 INSERT INTO `usuarios_admin` (`fk_id_tipo_documento`, `documento`, `nombre`, `primer_apellido`, `segundo_apellido`, `email`, `telefono`, `direccion`, `fk_id_ficha`, `password`, `intentos`, `estado`) VALUES
-(1, '123', 'JUAN DAVID', 'GOMEZ', 'BENAVIDES', 'JDGOMEZ@EXAMPLE.COM', '16516', 'CLL 23F', NULL, '202cb962ac59075b964b07152d234b70', 0, '1');
+(1, '1000', 'JUANITO', 'PEREZ', 'CILUETA', 'JUANIPE@EXAMPLE.COM', '651651', 'CRA 68', '1438303', NULL, NULL, '1'),
+(1, '123', 'JUAN DAVID', 'GOMEZ', 'BENAVIDES', 'JDGOMEZ@EXAMPLE.COM', '16516', 'CLL 23F', NULL, '202cb962ac59075b964b07152d234b70', 0, '1'),
+(1, '321', 'PEDRO', 'NUñEZ', 'SANTANA', 'PENUSA@EXAMPLE.COM', '2516516', 'CLL 50 SUR', NULL, 'caf1a3dfb505ffed0d024130f58c5cfa', NULL, '1');
 
 --
 -- Restricciones para tablas volcadas

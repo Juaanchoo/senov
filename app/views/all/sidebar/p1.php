@@ -15,7 +15,7 @@
 		</div>
 		
 		<div class="col-9">
-		 <button class="btn" style="color: white; float: right; margin-top: 13px; background-color: #000 !important;">Administrador <?php echo $_SESSION["nombre"].' '. $_SESSION["documento"];?></button>
+		 <button class="btn" style="color: white; float: right; margin-top: 13px; background-color: #000 !important;">Administrador: <?php echo $this->mostrar($_SESSION["nombre"]).' '. $_SESSION["documento"];?></button>
 		</div>
 		
 	</div>
@@ -32,7 +32,7 @@
 					  
 					 	foreach ($data as $r) {
 							 if($r->fk_id_cargo!=1){
-								 echo '<option value="'.$r->fk_id_cargo.'">'.$r->cargo.'</option>';
+								 echo '<option value="'.$r->fk_id_cargo.'">'.$this->mostrar($r->cargo).'</option>';
 							 }
 						 } 
 					  ?>
@@ -70,6 +70,12 @@
 						<a href="<?php echo URL_APP; ?>/admin/usuarios_admin" title="Gestion de usuarios">
 							<div class="barra"></div>
 							<span><i class="fas fa-link mr-2"></i>Gestion de Usuarios</span>
+						</a>
+					</li>
+					<li>
+						<a href="<?php echo URL_APP; ?>/admin/mostrarOpciones" title="Más Opciones">
+							<div class="barra"></div>
+							<span><i class="fas fa-link mr-2"></i>Más Opciones</span>
 						</a>
 					</li>
 					<li>
