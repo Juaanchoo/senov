@@ -25,10 +25,10 @@ class Security
                             header('location: '.URL_APP.'/admin');
                         break;
                         case '2':
-                            header('location: '.URL_APP.'/apoyo');
+                            header('location: '.URL_APP.'/user');
                         break;
                         case '4':
-                            header('location: '.URL_APP.'/instructor');
+                            header('location: '.URL_APP.'/user');
                         break;
                         
                         default:
@@ -70,11 +70,11 @@ class Security
                     header('location: '.URL_APP.'/admin');
                 break;
                 case '2':
-                    header('location: '.URL_APP.'/apoyo');
+                    header('location: '.URL_APP.'/user');
                 break;
                 
                 case '4':
-                    header('location: '.URL_APP.'/instructor');
+                    header('location: '.URL_APP.'/user');
                 break;
                 default:
                     header('location: '.URL_APP.'/');

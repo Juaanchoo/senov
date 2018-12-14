@@ -19,10 +19,10 @@
 							</a>
 						</div>
 						<div class="col-sm-6 col-md-3">
-						<a href="<?php echo URL_APP?>/admin/" style="text-decoration: none;">
+						<a href="<?php echo URL_APP?>/admin/fichas" style="text-decoration: none;">
 							<div class="card text-white shadow mb-3" style="max-width: 28rem; background-color: #FF8400; border-bottom: 5px solid #333; height: 12rem;">
 								<div class="card-body text-center">
-									<h5 class="card-title">Novedades sin revisar</h5>
+									<h5 class="card-title">Gestionar Fichas</h5>
 									<h1 class="card-text">
 									<i class="fas fa-chalkboard-teacher"></i>   
 									</h1>

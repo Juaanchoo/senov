@@ -51,18 +51,7 @@
 							<span><i class="fas fa-link mr-2"></i>Inicio</span>
 						</a>
 					</li>
-					<li>
-						<a href="<?php echo URL_APP; ?>" title="Ir a Diligenciar">
-							<div class="barra"></div>
-							<span><i class="fas fa-link mr-2"></i>Cambiar mis datos</span>
-						</a>
-					</li>
-					<li>
-						<a href="<?php echo URL_APP; ?>" title="Ir a Estados">
-							<div class="barra"></div>
-							<span><i class="fas fa-link mr-2"></i>Cambiar contraseña</span>
-						</a>
-					</li>
+					
 					<li>
 						<a href="<?php echo URL_APP; ?>/user/logout" title="Salir">
 							<div class="barra"></div>

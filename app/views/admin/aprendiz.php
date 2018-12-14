@@ -6,6 +6,7 @@
             <div class="row">
                 <div class="col-md-6">
                     <a href="" data-toggle="modal" data-target="#exampleModal" class="btn btn-outline-primary">Registrar aprendiz &nbsp;<i class="fas fa-plus"></i></a>
+                    <a href="<?php echo URL_APP;?>/admin/fichas"  class="btn btn-outline-primary">Ver fichas &nbsp;<i class="fas fa-clipboard-list"></i></a>
                 </div>
                 <div class="col-md-6">
                     <div class="search-form">

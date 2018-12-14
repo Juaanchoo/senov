@@ -18,6 +18,7 @@ class AdminController extends Controller
     private $jornadaModel;
     private $estadosModel;
     private $competenciaModel;
+    private $fichasModel;
 
      /**
      * @author senov
@@ -42,6 +43,7 @@ class AdminController extends Controller
         $this->jornadaModel = $this->model("jornada");
         $this->estadosModel = $this->model("estados");
         $this->competenciaModel = $this->model("competencia");
+        $this->fichasModel = $this->model("fichas");
     }
 
      /**
@@ -619,6 +621,121 @@ class AdminController extends Controller
             })</script>";
             $this->programaFormacion(null, $respuesta);
 
+        }
+    }
+
+    /**
+     * @author senov
+     * Mostrar vista de opciones
+     */
+    public function fichas($id_ficha = null, $respuesta = null)
+    {
+        $getfichas = $this->fichasModel->get_Fichas();
+        $jornada = $this->jornadaModel->get_jornada();
+        $modalidad = $this->modalidadModel->get_modalidad();
+        $programa = $this->programaModel->get_Programas();
+        $sede = $this->sedeModel->get_sedes();
+        $data2 = array(
+            "fichas" => $getfichas,
+            "jornadas" => $jornada,
+            "modalidades" => $modalidad,
+            "sedes" => $sede,
+            "programas" => $programa,
+            "respuesta" => $respuesta);
+        if($id_ficha!=null){
+            $getOne = $this->fichasModel->get_One_Fichas($id_ficha);
+            
+            $data2 = array(
+                "fichas" => $getfichas,
+                "jornadas" => $jornada,
+                "modalidades" => $modalidad,
+                "sedes" => $sede,
+                "programas" => $programa,
+                "one_ficha" => $getOne,
+                "respuesta" => $respuesta
+                );
+            $this->view('admin/fichas', $this->rol, $data2);
+            
+        }else{
+            $this->view('admin/fichas', $this->rol, $data2);
+        }
+    }
+
+    /**
+     * @author senov
+     * hacer PDF de aplazamiento
+     */
+    public function insertFichas()
+    {
+        if($_POST["fichaI"] && $_POST["jornadaI"] && $_POST["modalidadI"] && $_POST["trimestreI"] && $_POST["programaI"]){
+
+            $datos = array(
+                "ficha" => $this->cleanData($_POST["fichaI"]),
+                "sede" => $this->cleanData($_POST["sedeI"]),
+                "jornada" => $this->cleanData($_POST["jornadaI"]),
+                "modalidad" => $this->cleanData($_POST["modalidadI"]),
+                "trimestre" => $this->cleanData($_POST["trimestreI"]),
+                "programa" => $this->cleanData($_POST["programaI"])
+            );
+            $get = $this->fichasModel->set_Fichas($datos);
+            if($get!=false){
+                //var_dump($get);
+                $this->fichas(null,$get);
+            }else{
+                $respuesta = "<script>swal({
+                    type: 'error',
+                    title: 'Opps..',
+                    text: 'Lo sentimos! No se pudo Registrar',
+                })</script>";
+                $this->fichas(null,$get);
+            }
+
+        }else{
+            $respuesta = "<script>swal({
+                type: 'error',
+                title: 'Opps..',
+                text: 'Por favor! Llene todos los datos para poder registrar',
+            })</script>";
+            $this->fichas(null,$get);
+        }
+    }
+
+    /**
+     * @author senov
+     * hacer PDF de aplazamiento
+     */
+    public function updateFichas()
+    {
+        if($_POST["fichaU"] && $_POST["jornadaU"] && $_POST["modalidadU"] && $_POST["trimestreU"] && $_POST["programaU"]){
+
+            $datos = array(
+                "ficha" => $this->cleanData($_POST["fichaU"]),
+                "sede" => $this->cleanData($_POST["sedeU"]),
+                "jornada" => $this->cleanData($_POST["jornadaU"]),
+                "modalidad" => $this->cleanData($_POST["modalidadU"]),
+                "trimestre" => $this->cleanData($_POST["trimestreU"]),
+                "programa" => $this->cleanData($_POST["programaU"])
+            );
+            $get = $this->fichasModel->update_Fichas($datos);
+            if($get!=false){
+                //var_dump($get);
+                $this->fichas(null,$get);
+            }else{
+                $respuesta = "<script>swal({
+                    type: 'error',
+                    title: 'Opps..',
+                    text: 'Lo sentimos! No se pudo Actualizar',
+                })</script>";
+                $this->fichas(null,$get);
+            }
+
+        }else{
+            $respuesta = "<script>swal({
+                type: 'error',
+                title: 'Opps..',
+                text: 'Por favor! Llene todos los datos para poder Actualizar',
+            })</script>";
+            $this->fichas(null,$get);
         }
     }
 
