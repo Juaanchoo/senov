@@ -187,6 +187,7 @@
                             <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
+
                         <form method="POST" class="form" action="<?php echo URL_APP;?>/admin/habilitarUsuario">
                         <div class="modal-body">
                         <div class="col-12" style="margin-top:10px;">
@@ -216,6 +217,7 @@
                         </div>
 
                         <div class="modal-footer">
+                            <a href="<?php echo URL_APP;?>/admin/documentosHabilitados">Ver Documentos Habilitados</a>
                             <button type="submit" class="btn btn-primary">Habilitar Usuario</button>
                         </div>
                         </form>

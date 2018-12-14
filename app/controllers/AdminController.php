@@ -399,13 +399,39 @@ class AdminController extends Controller
      * habilita a un nuevo usuario para que se pueda registrar
      * 
      */
-    public function documentosHabilitados(){
+    public function documentosHabilitados($respuesta = null){
         $getHabil = $this->habilitadoModel->get_Habilitados();
+        $getDeshabil = $this->habilitadoModel->get_Deshabilitados();
         //var_dump($getHabil);
         $data2 = array(
-            "habilitados" => $getHabil);
+            "habilitados" => $getHabil,
+            "deshabilitados" => $getDeshabil,
+            "respuesta" => $respuesta);
             //var_dump($data2);
         $this->view('admin/documentos_habilitados',$this->rol, $data2);
+    }
+    
+    
+    /**
+     * @author senov
+     * habilita a un nuevo usuario para que se pueda registrar
+     * 
+     */
+    public function deshabilitar($documento){
+        //var_dump($documento);
+        $getRes = $this->habilitadoModel->desactivarHabilitados($documento);
+        $this->documentosHabilitados($getRes);
+    }
+    
+    /**
+     * @author senov
+     * habilita a un nuevo usuario para que se pueda registrar
+     * 
+     */
+    public function habilitar($documento){
+        //var_dump($documento);
+        $getRes = $this->habilitadoModel->activarHabilitados($documento);
+        $this->documentosHabilitados($getRes);
     } 
 
     /**

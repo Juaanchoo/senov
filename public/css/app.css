@@ -852,6 +852,12 @@ margin: 1px;
 	font-size: 30px;
 }
 
+.t-table{
+	background: rgb(35, 126, 211);
+	color: #fff;
+	font-size: 30px;
+}
+
 /** Modal*/
 .divM{
 	margin-left: 20px;

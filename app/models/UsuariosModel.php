@@ -66,7 +66,7 @@ class UsuariosModel extends DataBase
                 return "<script>swal({
                     type: 'error',
                     title: 'Opps..',
-                    text: 'Este documento ya está habilitado',
+                    text: 'Este documento ya está habilitado, si no lo ve, puede que este desactivado',
                 })</script>";
             }
 
