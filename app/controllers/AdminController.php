@@ -396,11 +396,66 @@ class AdminController extends Controller
      * @author senov
      * Mostrar vista de opciones
      */
-    public function roles($id = null, $respuesta = null)
+    public function roles($respuesta = null)
     {
         $getRol = $this->rolModel->get_Roles_Usuarios();
-        $data2 = array("roles" => $getRol);
+        $getCargos = $this->rolModel->get_Cargos();
+        $data2 = array(
+            "roles" => $getRol,
+            "respuesta" => $respuesta,
+            "tipo_rol" => $getCargos);
         $this->view('admin/roles', $this->rol, $data2);
+    }
+
+     /**
+     * @author senov
+     * Mostrar vista de opciones
+     */
+    public function setRoles()
+    {
+        $getRoles = $this->rolModel->get_Roles_Usuarios();
+        $cont =0;
+        if(isset($_POST["rolDocumento"]) && isset($_POST["rolTipoRol"])){
+            
+            foreach ($getRoles as $r) {
+                if($_POST["rolDocumento"] == $r->documento && $_POST["rolTipoRol"] == $r->fk_id_cargo){
+                    $respuesta = "<script>swal({
+                        type: 'error',
+                        title: 'Opps..',
+                        text: 'Lo sentimos! Este documento ya tiene el rol',
+                    })</script>";
+                    $cont = $cont +1;
+                    $this->roles($respuesta);
+                }
+            }
+            if($cont == 0){
+
+                $datos = array(
+                    "documento" => $this->cleanData($_POST["rolDocumento"]),
+                    "rol" => $this->cleanData($_POST["rolTipoRol"])
+                );
+                $respuesta = $this->rolModel->set_Roles($datos);
+                $this->roles($respuesta);
+            }
+
+        }else{
+            $respuesta = "<script>swal({
+                type: 'error',
+                title: 'Opps..',
+                text: 'Por favor! Llene los datos requeridos',
+            })</script>";
+            $this->roles($respuesta);
+        }
+    }
+
+    /**
+     * @author senov
+     * Mostrar vista de opciones
+     */
+    public function quitarRoles($id)
+    {
+        $respuesta = $this->rolModel->delete_Roles($id);
+        $this->roles($respuesta);
     }
 
     /**

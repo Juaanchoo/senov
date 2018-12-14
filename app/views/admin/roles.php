@@ -3,6 +3,19 @@
 	<div class="card shadow">
 	    <h5 class="card-header t-card">Gestión de los Roles de Usuarios</h5>
 	    <div class="card-body">
+            <div class="row">
+                <div class="col-md-6">
+                    <a href="" data-toggle="modal" data-target="#modalRol" class="btn btn-outline-primary">Asignar Rol &nbsp;<i class="fas fa-plus"></i></a>
+                    <a href="<?php echo URL_APP;?>/admin/usuarios_admin" class="btn btn-outline-primary">Ver Usuarios &nbsp;<i class="fas fa-user-check"></i></a>
+                </div>
+                
+                <div class="col-md-6">
+                    <div class="search-form">
+                        <span>Buscar:</span>
+                        <input type="text" placeholder="Buscar...">
+                    </div>
+                </div>
+            </div>
             <?php
                 if(isset($_SESSION["res"]) && $_SESSION["res"] != null){
                     echo $_SESSION["res"];
@@ -12,7 +25,7 @@
             <?php 
                 if(isset($data2["respuesta"]) && $data2["respuesta"] != null){
                     $_SESSION["res"] = $data2["respuesta"];
-                    header("Location: ".URL_APP."/admin/programaFormacion"); 
+                    header("Location: ".URL_APP."/admin/roles"); 
                  }
             ?>
             
@@ -35,50 +48,42 @@
                                     <td>	'.$this->mostrar($d->documento).'</td>
                                     <td>	'.$this->mostrar($d->nombre).'</td>
                                     <td>	'.$this->mostrar($d->primer_apellido).'</td>
-                                    <td> <a href="'.URL_APP.'/admin/roles/'.$d->id_permiso.'">editar</a>/<a href="'.URL_APP.'/admin/deleteRol/'.$d->id_permiso.'">eliminar</a>  </td>
+                                    <td> <a href="'.URL_APP.'/admin/quitarRoles/'.$d->id_permiso.'">quitar</a> </td>
                                 </tr>';
                             }
                         ?>
                 </tbody>
             </table>
 
-            <!--MODAL EDITAR PROGRAMA-->
-            <?php if(isset($data2["one_programa"]) && $data2["tipos_formacion"]): ?>
-                <div class="modal fade" id="Modalsen" tabindex="-1" role="dialog" aria-hidden="true">
-                    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+            <!--MODAL ASIGNAR ROL-->
+            <?php //if(isset($data2["one_programa"]) && $data2["tipos_formacion"]): ?>
+                <div class="modal fade" id="modalRol" tabindex="-1" role="dialog" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
                         <div class="modal-content">
 
                             <div class="modal-header t-card">
-                                <h5 class="modal-title" id="exampleModalLongTitle">Habilitar Usuario</h5>
+                                <h5 class="modal-title" id="exampleModalLongTitle">Asignar Rol a un Usuario</h5>
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                                 </button>
                             </div>
-                            <form method="POST" class="form" action="<?php echo URL_APP;?>/admin/updatePrograma">
+                            <form method="POST" class="form" action="<?php echo URL_APP;?>/admin/setRoles">
                             <div class="modal-body">
                             <div class="col-12" style="margin-top:10px;">
                                 <div class="form-group">
-                                    <label for="id_programaU">Id Programa de Formación</label>
-                                    <input  type="text" disabled value="<?php echo $data2["one_programa"]->id_programa_formacion;?>" required class="form-control">
-                                    <input  type="hidden" name="id_programaU" value="<?php echo $data2["one_programa"]->id_programa_formacion;?>" required class="form-control">
+                                    <label for="rolDocumento">Documento</label>
+                                    <input  type="text" name="rolDocumento" value="" required class="form-control">
                                     
                                 </div>
+                                
                                 <div class="form-group">
-                                    <label for="programa_formacionU">Programa de Formación</label>
-                                    <?php //var_dump($data2["one_programa"]); var_dump($data2["tipos_formacion"]);?>
-                                    <input  type="text" name="programa_formacionU" value="<?php echo $this->mostrar($data2["one_programa"]->programa_formacion);?>" required class="form-control">
-                                    
-                                </div>
-                                <div class="form-group">
-                                    <label for="tipo_formacionU">Tipo de Formación &nbsp;</label>
-                                    <select name="tipo_formacionU" required >
-                                        <option value="<?php echo $data2["one_programa"]->fk_id_tipo_formacion;?>" selected ><?php echo $data2["one_programa"]->tipo_formacion; ?></option>
+                                    <label for="rolTipoRol">Tipo de Rol &nbsp;</label>
+                                    <select name="rolTipoRol" required >
+                                        <option value="" selected >Seleccione..</option>
                                         <?php
                                         
-                                            foreach ($data2["tipos_formacion"] as $tf) {
-                                                if($data2["one_programa"]->fk_id_tipo_formacion != $tf->id_tipo_formacion){
-                                                    echo '<option value="'.$tf->id_tipo_formacion.'">'.$tf->tipo_formacion.'</option>';
-                                                }
+                                            foreach ($data2["tipo_rol"] as $r) {
+                                                    echo '<option value="'.$r->id_cargo.'">'.$r->cargo.'</option>';
                                             }
                                         ?>  
                                     </select>
@@ -92,14 +97,14 @@
                             </div>
 
                             <div class="modal-footer">
-                                <button type="submit" class="btn btn-primary">Actualizar Programa</button>
+                                <button type="submit" class="btn btn-primary">Asignar Rol</button>
                             </div>
                             </form>
                         </div>
                     </div>
                 </div>      
-            <?php endif; ?>
-            <!--FIN MODAL EDITAR PROGRAMA-->
+            <?php //endif; ?>
+            <!--FIN MODAL ASIGNAR ROL-->
         </div>
     </div>
 </div>

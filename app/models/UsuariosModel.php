@@ -110,12 +110,11 @@ class UsuariosModel extends DataBase
         try {
             $sql="SELECT td.`tipo_documento`, usu.`documento`, usu.`nombre`, usu.`primer_apellido`, 
             usu.`segundo_apellido`, usu.`email`, usu.`telefono`, usu.`direccion`, usu.`estado` FROM 
-            `usuarios_admin` AS usu INNER JOIN permiso_cargo AS pc ON usu.documento=pc.fk_documento 
-            INNER JOIN tipo_documento AS td ON usu.fk_id_tipo_documento=td.id_tipo_documento 
-            WHERE pc.fk_id_cargo=? AND usu.documento!=?";
+            `usuarios_admin` AS usu INNER JOIN tipo_documento AS td 
+            ON usu.fk_id_tipo_documento=td.id_tipo_documento WHERE usu.fk_id_ficha is ? AND usu.documento!=?";
 
             $this->db->query($sql);
-            $this->db->bind(1, 3);
+            $this->db->bind(1, null);
             $this->db->bind(2, $_SESSION["documento"]);
             $get = $this->db->getAll();
             if(!empty($get)){
@@ -140,12 +139,12 @@ class UsuariosModel extends DataBase
             //var_dump($documento);
             $sql="SELECT td.`tipo_documento`, usu.`documento`, usu.`nombre`, usu.`primer_apellido`, 
             usu.`segundo_apellido`, usu.`email`, usu.`telefono`, usu.`direccion`, usu.`estado` 
-            FROM `usuarios_admin` AS usu INNER JOIN permiso_cargo AS pc ON usu.documento=pc.fk_documento 
-            INNER JOIN tipo_documento AS td ON usu.fk_id_tipo_documento=td.id_tipo_documento 
-            WHERE pc.fk_id_cargo=? AND usu.documento=? AND usu.documento!=?";
+            FROM `usuarios_admin` AS usu INNER JOIN tipo_documento AS td ON usu.fk_id_tipo_documento=td.id_tipo_documento 
+            WHERE  usu.fk_id_ficha is ? AND usu.documento = ? AND usu.documento != ?";
 
             $this->db->query($sql);
-            $this->db->bind(1, 3);
+            //$this->db->bind(1, 5);
+            $this->db->bind(1, null);
             $this->db->bind(2, $documento);
             $this->db->bind(3, $_SESSION["documento"]);
             $get = $this->db->getOne();
