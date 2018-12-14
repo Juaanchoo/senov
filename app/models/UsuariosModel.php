@@ -111,11 +111,12 @@ class UsuariosModel extends DataBase
             $sql="SELECT td.`tipo_documento`, usu.`documento`, usu.`nombre`, usu.`primer_apellido`, 
             usu.`segundo_apellido`, usu.`email`, usu.`telefono`, usu.`direccion`, usu.`estado` FROM 
             `usuarios_admin` AS usu INNER JOIN tipo_documento AS td 
-            ON usu.fk_id_tipo_documento=td.id_tipo_documento WHERE usu.fk_id_ficha is ? AND usu.documento!=?";
+            ON usu.fk_id_tipo_documento=td.id_tipo_documento WHERE usu.fk_id_ficha is ? AND usu.documento!=? AND usu.estado=?";
 
             $this->db->query($sql);
             $this->db->bind(1, null);
             $this->db->bind(2, $_SESSION["documento"]);
+            $this->db->bind(3, 1);
             $get = $this->db->getAll();
             if(!empty($get)){
                 return $get;
@@ -140,13 +141,14 @@ class UsuariosModel extends DataBase
             $sql="SELECT td.`tipo_documento`, usu.`documento`, usu.`nombre`, usu.`primer_apellido`, 
             usu.`segundo_apellido`, usu.`email`, usu.`telefono`, usu.`direccion`, usu.`estado` 
             FROM `usuarios_admin` AS usu INNER JOIN tipo_documento AS td ON usu.fk_id_tipo_documento=td.id_tipo_documento 
-            WHERE  usu.fk_id_ficha is ? AND usu.documento = ? AND usu.documento != ?";
+            WHERE  usu.fk_id_ficha is ? AND usu.documento = ? AND usu.documento != ? AND usu.estado=?";
 
             $this->db->query($sql);
             //$this->db->bind(1, 5);
             $this->db->bind(1, null);
             $this->db->bind(2, $documento);
             $this->db->bind(3, $_SESSION["documento"]);
+            $this->db->bind(4, 1);
             $get = $this->db->getOne();
             if($get==true){
                 return $get;

@@ -11,6 +11,7 @@ class AdminController extends Controller
     private $usuariosModel;
     private $programaModel;
     private $tformacionModel;
+    private $habilitadoModel;
 
      /**
      * @author senov
@@ -27,6 +28,7 @@ class AdminController extends Controller
         $this->tablasModel = $this->model("tablas");
         $this->programaModel = $this->model("Programa");
         $this->tformacionModel = $this->model("Tipoformacion");
+        $this->habilitadoModel = $this->model("Habilitado");
         $this->rol = $this->rolModel->get_Roles($_SESSION["documento"]);
     }
 
@@ -390,6 +392,20 @@ class AdminController extends Controller
             })</script>";
             $this->usuarios_admin(null, $res);
         }
+    } 
+
+    /**
+     * @author senov
+     * habilita a un nuevo usuario para que se pueda registrar
+     * 
+     */
+    public function documentosHabilitados(){
+        $getHabil = $this->habilitadoModel->get_Habilitados();
+        //var_dump($getHabil);
+        $data2 = array(
+            "habilitados" => $getHabil);
+            //var_dump($data2);
+        $this->view('admin/documentos_habilitados',$this->rol, $data2);
     } 
 
     /**
