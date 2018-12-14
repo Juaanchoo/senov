@@ -517,12 +517,14 @@ class AdminController extends Controller
     public function programaFormacion($id_programa = null, $respuesta = null)
     {
         $getProgramas = $this->programaModel->get_Programas();
+        $tfor = $this->tformacionModel->get_Tipos_Formacion();
         $data2 = array(
             "programas_formacion" => $getProgramas,
+            "tipos_formacion" => $tfor,
             "respuesta" => $respuesta);
         if($id_programa!=null){
             $getOne = $this->programaModel->get_One_Programa($id_programa);
-            $tfor = $this->tformacionModel->get_Tipos_Formacion();
+            
             $data2 = array(
                 "programas_formacion" => $getProgramas,
                 "tipos_formacion" => $tfor,
@@ -557,6 +559,42 @@ class AdminController extends Controller
                     type: 'error',
                     title: 'Opps..',
                     text: 'Lo sentimos! No se pudo actualizar',
+                })</script>";
+                $this->programaFormacion(null, $respuesta);
+            }
+
+        }else{
+            $respuesta = "<script>swal({
+                type: 'error',
+                title: 'Opps..',
+                text: 'Por favor! Llene todos los datos para poder actualizar',
+            })</script>";
+            $this->programaFormacion(null, $respuesta);
+
+        }
+    }
+
+    /**
+     * @author senov
+     * Mostrar vista de opciones
+     */
+    public function insertPrograma()
+    {
+        if($_POST["programa_formacionI"] && $_POST["tipo_formacionI"]){
+
+            $datos = array(
+                "programa_formacion" => $this->cleanData($_POST["programa_formacionI"]),
+                "tipo_formacion" => $this->cleanData($_POST["tipo_formacionI"])
+            );
+            $get = $this->programaModel->set_Programas($datos);
+            if($get!=false){
+                //var_dump($get);
+                $this->programaFormacion(null,$get);
+            }else{
+                $respuesta = "<script>swal({
+                    type: 'error',
+                    title: 'Opps..',
+                    text: 'Lo sentimos! No se pudo Registrar',
                 })</script>";
                 $this->programaFormacion(null, $respuesta);
             }
